@@ -15,7 +15,49 @@ public class SettingsWindow : MonoBehaviour
     [Space(15)]
     [SerializeField] private Sprite toggleON;
     [SerializeField] private Sprite toggleOFF;
- 
+
+
+
+    private void Start()
+    {
+        LoadSoundsSettings();
+        LoadMusicSettings();
+    }
+
+
+    private void LoadSoundsSettings()
+    {
+        bool sounds = YandexGame.savesData.sounds;
+
+        if (sounds == true)
+        {
+            buttonsAudioSource.volume = 1f;
+            soundsButtonImage.sprite = toggleON;
+        }
+        else if (sounds == false)
+        {
+            buttonsAudioSource.volume = 0f;
+            soundsButtonImage.sprite = toggleOFF;
+        }
+    }
+
+    private void LoadMusicSettings()
+    {
+        bool music = YandexGame.savesData.music;
+
+        if (music == true)
+        {
+            musicButtonImage.sprite = toggleON;
+            musicAudioSource.volume = 1f;
+        }
+        else if (music == false)
+        {
+            musicAudioSource.Stop();
+            musicAudioSource.volume = 0f;
+            musicButtonImage.sprite = toggleOFF;
+        }
+    }
+
     public void btnSounds()
     {
         bool sounds = YandexGame.savesData.sounds;

@@ -8,13 +8,20 @@ public class MoveController : MonoBehaviour
 
     public void MoveIn(RectTransform moveTransform)
     {
+        StopCoroutines();
         moveTransform.gameObject.SetActive(true);
         StartCoroutine(MoveInCoroutine(moveTransform));
     }
 
     public void MoveOut(RectTransform moveTransform)
     {
+        StopCoroutines();
         StartCoroutine(MoveOutCoroutine(moveTransform));
+    }
+
+    private void StopCoroutines()
+    {
+        StopAllCoroutines();
     }
 
     public IEnumerator MoveInCoroutine(RectTransform moveTransform)
@@ -31,12 +38,12 @@ public class MoveController : MonoBehaviour
             timePassd += Time.deltaTime;
         }
 
-       moveTransform.anchoredPosition = Vector2.zero;
+        moveTransform.anchoredPosition = Vector2.zero;
     }
 
     public IEnumerator MoveOutCoroutine(RectTransform moveTransform)
     {
-        Vector2 desiredPosition = new Vector2(0, 1000f);
+        Vector2 desiredPosition = new Vector2(0, 1500f);
         float timePassd = 0f;
 
         while (timePassd < moveSpeed)
@@ -48,7 +55,7 @@ public class MoveController : MonoBehaviour
             timePassd += Time.deltaTime;
         }
 
-        moveTransform.anchoredPosition = new Vector2(0, 1000f);
+        moveTransform.anchoredPosition = new Vector2(0, 1500f);
         moveTransform.gameObject.SetActive(false);
     }
 }

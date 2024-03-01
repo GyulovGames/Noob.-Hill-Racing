@@ -6,51 +6,79 @@ public class FadeController : MonoBehaviour
     [SerializeField] private float fadeDuration;
 
 
-    public void Appear( CanvasGroup canvasGroup)
+    public void Appear( CanvasGroup[] appearCanvasGroup)
     {
-        StartCoroutine(AppearCoroutine(canvasGroup));
-        canvasGroup.gameObject.SetActive(true);
+        foreach (CanvasGroup group in appearCanvasGroup) 
+        {
+            group.gameObject.SetActive(true);
+        }
+
+        StartCoroutine(AppearCoroutine(appearCanvasGroup));      
     }
 
-    public void Disappear(CanvasGroup canvasGroup)
+    public void Disappear(CanvasGroup[] disappearCanvasGroup)
     {
-        StartCoroutine(DisappearCoroutine(canvasGroup));
+        StartCoroutine(DisappearCoroutine(disappearCanvasGroup));
     }
 
 
 
-    public IEnumerator AppearCoroutine( CanvasGroup canvasGroup)
-    {
-        float appearGroupAlpha = canvasGroup.alpha;
+    public IEnumerator AppearCoroutine( CanvasGroup[] appdearCanvasGroup)
+    { 
+        float[] appearGroupAlpha = new float[appdearCanvasGroup.Length];
         float timePassed = 0f;
+
+        for (int i = 0;  i < appdearCanvasGroup.Length; i++)
+        {
+            appearGroupAlpha[i] = appdearCanvasGroup[i].alpha;
+        }
 
         while (timePassed < fadeDuration)
         {
             float normalizedTime = timePassed / fadeDuration;
-            canvasGroup.alpha = Mathf.Lerp(appearGroupAlpha, 1f, normalizedTime);
+
+            for(int i = 0;i < appdearCanvasGroup.Length;i++)
+            {
+                appdearCanvasGroup[i].alpha = Mathf.Lerp(appearGroupAlpha[i], 1f, normalizedTime);
+            }
 
             yield return null;
             timePassed += Time.deltaTime;
         }
 
-        canvasGroup.alpha = 1f;
+        foreach (CanvasGroup group in appdearCanvasGroup)
+        {
+            group.alpha = 1f;
+        }
     }
 
-    public IEnumerator DisappearCoroutine(CanvasGroup canvasGroup)
+    public IEnumerator DisappearCoroutine(CanvasGroup[] disappearCanvasGroup)
     {
-        float disappearGroupAlpha = canvasGroup.alpha;      
+        float[] appearGroupAlpha = new float[disappearCanvasGroup.Length];
         float timePassed = 0f;
+
+        for (int i = 0; i < disappearCanvasGroup.Length; i++)
+        {
+            appearGroupAlpha[i] = disappearCanvasGroup[i].alpha;
+        }
 
         while (timePassed < fadeDuration)
         {
             float normalizedTime = timePassed / fadeDuration;
-            canvasGroup.alpha = Mathf.Lerp(disappearGroupAlpha, 0f, normalizedTime);
+
+            for (int i = 0; i < disappearCanvasGroup.Length; i++)
+            {
+                disappearCanvasGroup[i].alpha = Mathf.Lerp(appearGroupAlpha[i], 0f, normalizedTime);
+            }
 
             yield return null;
             timePassed += Time.deltaTime;
         }
 
-        canvasGroup.alpha = 0f;
-        canvasGroup.gameObject.SetActive(false);
+        foreach (CanvasGroup group in disappearCanvasGroup)
+        {
+            group.alpha = 0f;
+            group.gameObject.SetActive(false);
+        }
     }
 }
