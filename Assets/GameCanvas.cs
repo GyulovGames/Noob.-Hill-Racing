@@ -1,28 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using YG;
 
-public class MainCanvas : MonoBehaviour
+public class GameCanvas : MonoBehaviour
 {
     [SerializeField] private FadeController fadeController;
     [SerializeField] private MoveController moveController;
     [Space(15)]
     [SerializeField] private CanvasGroup smoothTransitionPanel;
     [SerializeField] private CanvasGroup fadeBackgroundPanel;
-    [SerializeField] private CanvasGroup gameMenu;
-    [SerializeField] private CanvasGroup mainMenu;
     [Space(15)]
-    [SerializeField] private RectTransform traillSelectionWindow;
-    [SerializeField] private RectTransform vehicleSelectionWindow;
-    [SerializeField] private RectTransform upgradeWindow;
-    [SerializeField] private RectTransform settingsWindow;
-    [SerializeField] private RectTransform allGamesWindow;
-
     [SerializeField] private AudioSource buttonSoundsPlayerAudioSource;
-    [SerializeField] private AudioSource musicPlayerAudioSource;
+    [SerializeField] private RectTransform pauseWindow;
     [SerializeField] private Image soundsButtonImage;
     [SerializeField] private Image musicButtonImage;
     [Space(15)]
@@ -30,11 +22,15 @@ public class MainCanvas : MonoBehaviour
     [SerializeField] private Sprite toggleOFF;
 
 
-    public void UpdateUI()
+    public void Start()
     {
         LoadSoundsSettings();
         LoadMusicSettings();
+
+        CanvasGroup[] disapearGroup = new CanvasGroup[] { smoothTransitionPanel };
+        fadeController.Disappear(disapearGroup);
     }
+
 
     private void LoadSoundsSettings()
     {
@@ -56,10 +52,13 @@ public class MainCanvas : MonoBehaviour
     {
         bool music = YandexGame.savesData.music;
 
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+
         if (music == true)
         {
-            musicButtonImage.sprite = toggleON;
             musicPlayerAudioSource.volume = 1f;
+            musicButtonImage.sprite = toggleON;
         }
         else if (music == false)
         {
@@ -95,6 +94,9 @@ public class MainCanvas : MonoBehaviour
         buttonSoundsPlayerAudioSource.Play();
         bool music = YandexGame.savesData.music;
 
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+
         if (music == true)
         {
             musicPlayerAudioSource.Pause();
@@ -112,83 +114,38 @@ public class MainCanvas : MonoBehaviour
     }
 
 
-    public void btn_Settings()
+    public void btn_Pause()
     {
         buttonSoundsPlayerAudioSource.Play();
+
         CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
         fadeController.Appear(groupToAppear);
-        moveController.MoveIn(settingsWindow);
+        moveController.MoveIn(pauseWindow);
     }
 
-    public void btn_CloseSettings()
+    public void btn_Resume()
     {
         buttonSoundsPlayerAudioSource.Play();
-        moveController.MoveOut(settingsWindow);
-        CanvasGroup[] groupToDesappear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesappear);
-    }
 
-    public void btn_AllGames()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Appear(groupToAppear);
-        moveController.MoveIn(allGamesWindow);
-    }
-
-    public void btn_CloseAllGames()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        moveController.MoveOut(allGamesWindow);
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-    }
-
-    public void btn_Transport()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Appear(groupToAppear);
-        moveController.MoveIn(vehicleSelectionWindow);
-    }
-
-    public void btn_CloseTransport()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-        moveController.MoveOut(vehicleSelectionWindow);
-    }
-
-    public void btn_Traill()
-    {
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        buttonSoundsPlayerAudioSource.Play();
-        fadeController.Appear(groupToAppear);
-        moveController.MoveIn(traillSelectionWindow);
-    }
-
-    public void btn_CloseTraill()
-    {
-        buttonSoundsPlayerAudioSource?.Play();
-        moveController.MoveOut(traillSelectionWindow);
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-    }
-
-    public void btn_Play()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToDisappear = new CanvasGroup[] { mainMenu };
+        CanvasGroup[] groupToDisappear = new CanvasGroup[] { fadeBackgroundPanel };
         fadeController.Disappear(groupToDisappear);
-
-        CanvasGroup[] groupToAppear = new CanvasGroup[] {smoothTransitionPanel };
-        fadeController.Appear(groupToAppear);
-        Invoke("LoadDelay", 1f);
+        moveController.MoveOut(pauseWindow);
     }
 
-    private void LoadDelay()
+    public void btn_Home()
     {
-        SceneManager.LoadScene("Level (1) Countryside");
+        buttonSoundsPlayerAudioSource.Play();
+
+        CanvasGroup[] appearGroup = new CanvasGroup[] { smoothTransitionPanel };
+        fadeController.Appear(appearGroup);
+        moveController.MoveOut(pauseWindow);
+        StartCoroutine(LoadDelay("MainMenu"));
+    }
+
+
+    private IEnumerator LoadDelay(string sceneName)
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneName);
     }
 }

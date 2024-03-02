@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 6
         width: 7
         height: 11
       alignment: 7
@@ -168,8 +168,8 @@ TextureImporter:
       name: Foream
       rect:
         serializedVersion: 2
-        x: 7
-        y: 5
+        x: 0
+        y: 0
         width: 3
         height: 6
       alignment: 9
@@ -186,11 +186,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hea
+      name: Blinking 1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 11
+        x: 7
+        y: 9
         width: 8
         height: 8
       alignment: 7
@@ -210,8 +210,8 @@ TextureImporter:
       name: Sholder
       rect:
         serializedVersion: 2
-        x: 10
-        y: 5
+        x: 3
+        y: 0
         width: 3
         height: 6
       alignment: 9
@@ -228,11 +228,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head turn
+      name: Blinking 2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 11
+        x: 15
+        y: 9
         width: 8
         height: 8
       alignment: 7
@@ -248,6 +248,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Blinking 3
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 9
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f99b8f999aa885f428bbe0bd9d3847c9
+      internalID: -1027959447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Driving 1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb50055f928730e44a4ff1b5829533e9
+      internalID: -70694118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Driving 2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbdc9cd0aefb7724ea3d57e0d743a354
+      internalID: 660146130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Driving 3
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 1
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1738b57b27d9ff4f8305915f078c549
+      internalID: -2038767506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dead
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 9
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 153fe31d73628da43bdccc9c2ff85ee4
+      internalID: -775026257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -259,11 +364,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Blinking 1: -1693078709
+      Blinking 2: 598501527
+      Blinking 3: -1027959447
       Body: 1855613642
+      Dead: -775026257
+      Driving 1: -70694118
+      Driving 2: 660146130
+      Driving 3: -2038767506
       Foream: 1958071603
-      Hea: -1693078709
       Head: 953766947
-      Head turn: 598501527
       Sholder: 820988020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
