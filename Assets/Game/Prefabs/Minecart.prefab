@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 2075956087508128426}
   - component: {fileID: 6091734483013821313}
   - component: {fileID: 4654548929153725228}
+  - component: {fileID: 6349741135228400274}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -408,6 +409,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &6349741135228400274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649602640612753560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576d53f426cf47249977853ebca71d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hingeJoint2D: {fileID: 6091734483013821313}
+  headHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2148065601475700971}
+        m_TargetAssemblyTypeName: MinecartVehicle, Assembly-CSharp
+        m_MethodName: HitNoobHead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3816512318829225716
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +575,7 @@ WheelJoint2D:
   m_Anchor: {x: 0.532, y: -0.5}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
-    m_DampingRatio: 0.1
+    m_DampingRatio: 0
     m_Frequency: 3.6
     m_Angle: 90
   m_UseMotor: 0
@@ -571,7 +600,7 @@ WheelJoint2D:
   m_Anchor: {x: -0.532, y: -0.5}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
-    m_DampingRatio: 0.1
+    m_DampingRatio: 0
     m_Frequency: 3.6
     m_Angle: 90
   m_UseMotor: 0
@@ -641,12 +670,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 100
+  fuelDrainSpeed: 2.5
+  gasFuelDrainSpeed: 3
+  curentFuelAmount: 100
   vehicleRotationSpeed: 100
   noobAnimator: {fileID: 4068829318551616822}
   vehicleRigidBody: {fileID: 122933244912844942}
-  frontDrive: {fileID: 8266255824983265361}
-  rearDrive: {fileID: 6197211696767992626}
+  frontWheelRigidBody: {fileID: 8266255824983265361}
+  rearWheelRigidBody: {fileID: 6197211696767992626}
+  frontWheel: {fileID: 1335708232060750416}
+  rearWheel: {fileID: 4855483122459841918}
+  frontCircleCollider: {fileID: 8889994857396013199}
+  rearCircleCollider: {fileID: 1064476386950074343}
 --- !u!1 &4306941934868419774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1105,7 @@ GameObject:
   - component: {fileID: 6197211696767992626}
   - component: {fileID: 1064476386950074343}
   m_Layer: 0
-  m_Name: RearDrive
+  m_Name: RearWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1218,7 +1253,7 @@ GameObject:
   - component: {fileID: 8266255824983265361}
   - component: {fileID: 8889994857396013199}
   m_Layer: 0
-  m_Name: FrontDrive
+  m_Name: FrontWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

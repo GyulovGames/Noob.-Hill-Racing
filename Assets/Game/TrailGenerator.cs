@@ -29,6 +29,7 @@ public class TrailGenerator : MonoBehaviour
             lastPoint = transform.position + new Vector3(i * xMultiplier, Mathf.PerlinNoise(0, i * noiseStep) * yMultiplier);
             spriteShapeController.spline.InsertPointAt(i, lastPoint);
 
+
             if (i != 0 && i != levelLenght - 1)
             {
                 spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);

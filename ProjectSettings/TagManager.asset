@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MainCanvas
   - MusicPlayer
+  - Ground
+  - Canister
+  - Coin
   layers:
   - Default
   - TransparentFX

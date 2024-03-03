@@ -13,10 +13,17 @@ namespace YG
 
 
         // Ваши сохранения
-        public int[] completedLevelsStars = new int[130];
-        public int completedLevels = 1;
+        public int unlocckedTrails = 1;
         public bool sounds = true;
         public bool music = true;
         // ...
+
+        // Характеристики вагонетки
+        public float minecartEnginePower = 100f;
+        public float minecartFrontDirve = 0f;
+        public float minecartSuspensionStab = 0f;
+        public float minecartMaxFuelAmount = 100f;
+        public float minecartWheelsGrip = 0.2f;
+        //
     }
 }
