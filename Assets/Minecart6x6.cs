@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class MinecartVehicle : MonoBehaviour
+public class Minecart6x6 : MonoBehaviour
 {
     [SerializeField] private float fuelDrainSpeed;
     [SerializeField] private float gasFuelDrainSpeed;
@@ -13,20 +13,25 @@ public class MinecartVehicle : MonoBehaviour
     [Space(15)]
     [SerializeField] private Animator noobAnimator;
     [SerializeField] private Rigidbody2D vehicleRigidBody;
-    [SerializeField] private Rigidbody2D frontWheelRigidBody;
-    [SerializeField] private Rigidbody2D rearWheelRigidBody;
-    [SerializeField] private WheelJoint2D frontWheel;
-    [SerializeField] private WheelJoint2D rearWheel;
-    [SerializeField] private CircleCollider2D frontCircleCollider;
-    [SerializeField] private CircleCollider2D rearCircleCollider;
- 
+    [SerializeField] private Rigidbody2D frontWheel_RigidBody;
+    [SerializeField] private Rigidbody2D rearWheel_RigidBody;
+    [SerializeField] private Rigidbody2D rearWheel_RigidBody2;
+    [SerializeField] private WheelJoint2D frontWheel_Joint;
+    [SerializeField] private WheelJoint2D rearWheel_Joint;
+    [SerializeField] private WheelJoint2D rearWheel_Joint2d;
+
+    [SerializeField] private CircleCollider2D frontWheel_CircleCollider;
+    [SerializeField] private CircleCollider2D rearWheel_CircleCollider;
+    [SerializeField] private CircleCollider2D rearWheel_CircleCollider2;
+
+
     private bool isPause = false;
 
-    private float enginePower;
-    private float frontDrive;
-    private float suspensionStab;
-    private float maxFuelAmount;
-    private float wheelsGrip;
+    public float enginePower;
+    public float frontDrive;
+    public float suspensionStab;
+    public float maxFuelAmount;
+    public float wheelsGrip;
 
 
 
@@ -38,19 +43,19 @@ public class MinecartVehicle : MonoBehaviour
 
     private void LoadSpecifications()
     {
-        enginePower = YandexGame.savesData.minecartEnginePower;
-        frontDrive = YandexGame.savesData.minecartFrontDirve;
-        suspensionStab = YandexGame.savesData.minecartSuspensionStab;
-        maxFuelAmount = YandexGame.savesData.minecartMaxFuelAmount;
-        wheelsGrip = YandexGame.savesData.minecartWheelsGrip;
+        enginePower = YandexGame.savesData.minecart4x4Part[0];
+        frontDrive = YandexGame.savesData.minecart4x4Part[2];
+        maxFuelAmount = YandexGame.savesData.minecart4x4Part[4];
 
-        JointSuspension2D ration = frontWheel.suspension; //!!!!!!!!!
-        ration.dampingRatio = YandexGame.savesData.minecartSuspensionStab;
-        frontWheel.suspension = ration;
-        rearWheel.suspension = ration;
+        JointSuspension2D jointSuspension = frontWheel_Joint.suspension;
+        jointSuspension.dampingRatio = YandexGame.savesData.minecart4x4Part[1];
+        frontWheel_Joint.suspension = jointSuspension;
+        rearWheel_Joint.suspension = jointSuspension;
 
-        frontCircleCollider.sharedMaterial.friction = YandexGame.savesData.minecartWheelsGrip;
-        rearCircleCollider.sharedMaterial.friction = YandexGame.savesData.minecartWheelsGrip;
+        frontWheel_CircleCollider.sharedMaterial.friction = YandexGame.savesData.minecart4x4Part[3];
+        rearWheel_CircleCollider.sharedMaterial.friction = YandexGame.savesData.minecart4x4Part[3];
+        rearWheel_CircleCollider2.sharedMaterial.friction = YandexGame.savesData.minecart4x4Part[3];
+
     }
 
     private void SetCurrentAmount()
@@ -67,15 +72,19 @@ public class MinecartVehicle : MonoBehaviour
             NoobAnimations(horizontal);
             UpdateUIFuelBar(horizontal);
 
-            rearWheelRigidBody.AddTorque(-horizontal * enginePower * Time.fixedDeltaTime);
-            frontWheelRigidBody.AddTorque(-horizontal * frontDrive * Time.fixedDeltaTime);
+            rearWheel_RigidBody.AddTorque(-horizontal * enginePower * Time.fixedDeltaTime);
+            rearWheel_RigidBody2.AddTorque(-horizontal * enginePower * Time.fixedDeltaTime);
+
+            frontWheel_RigidBody.AddTorque(-horizontal * frontDrive * Time.fixedDeltaTime);
+
+
             vehicleRigidBody.AddTorque(horizontal * vehicleRotationSpeed * Time.fixedDeltaTime);
         }
     }
 
     private void UpdateUIFuelBar(float value)
     {
-        if(value > 0 || value < 0)
+        if (value > 0 || value < 0)
         {
             curentFuelAmount -= Time.deltaTime * gasFuelDrainSpeed;
         }
@@ -84,7 +93,7 @@ public class MinecartVehicle : MonoBehaviour
             curentFuelAmount -= Time.deltaTime * fuelDrainSpeed;
         }
 
-        if(curentFuelAmount <= 0)
+        if (curentFuelAmount <= 0)
         {
             isPause = true;
             StartCoroutine(GameCanvas.InstanceGC.OpenResultWindow("Fuel"));
@@ -130,7 +139,7 @@ public class MinecartVehicle : MonoBehaviour
             GameCanvas.InstanceGC.UpdateFuelBar(curentFuelAmount);
 
         }
-        if(collision.gameObject.tag == "Coin")
+        if (collision.gameObject.tag == "Coin")
         {
             GameCanvas.InstanceGC.CoinsCollect();
         }

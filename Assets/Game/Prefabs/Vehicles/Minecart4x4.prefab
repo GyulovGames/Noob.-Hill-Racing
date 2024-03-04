@@ -453,12 +453,12 @@ GameObject:
   - component: {fileID: 2384106004235120556}
   - component: {fileID: 2148065601475700971}
   m_Layer: 0
-  m_Name: Minecart
+  m_Name: Minecart4x4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1281119343635048856
 Transform:
   m_ObjectHideFlags: 0
@@ -670,18 +670,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelDrainSpeed: 2.5
-  gasFuelDrainSpeed: 3
+  fuelDrainSpeed: 0.01
+  gasFuelDrainSpeed: 0.05
   curentFuelAmount: 100
   vehicleRotationSpeed: 100
+  physicMaterial: {fileID: 0}
   noobAnimator: {fileID: 4068829318551616822}
   vehicleRigidBody: {fileID: 122933244912844942}
-  frontWheelRigidBody: {fileID: 8266255824983265361}
-  rearWheelRigidBody: {fileID: 6197211696767992626}
-  frontWheel: {fileID: 1335708232060750416}
-  rearWheel: {fileID: 4855483122459841918}
-  frontCircleCollider: {fileID: 8889994857396013199}
-  rearCircleCollider: {fileID: 1064476386950074343}
+  frontWheel_RigidBody: {fileID: 8266255824983265361}
+  rearWheel_RigidBody: {fileID: 6197211696767992626}
+  frontWheel_Joint: {fileID: 1335708232060750416}
+  rearWheel_Joint: {fileID: 4855483122459841918}
+  frontWheel_CircleCollider: {fileID: 8889994857396013199}
+  rearWheel_CircleCollider: {fileID: 1064476386950074343}
+  enginePower: 0
+  frontDrive: 0
+  maxFuelAmount: 0
 --- !u!1 &4306941934868419774
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +841,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.00000004470348, y: -0.25599986}
+  m_ConnectedAnchor: {x: -0.000021792946, y: -0.25598666}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

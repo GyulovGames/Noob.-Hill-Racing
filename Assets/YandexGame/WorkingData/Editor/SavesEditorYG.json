@@ -1,14 +1,44 @@
 {
-    "idSave": 2053,
+    "idSave": 3568,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "unlocckedTrails": 1,
+    "savedCoins": 500,
     "sounds": true,
     "music": true,
-    "minecartEnginePower": 100.0,
-    "minecartFrontDirve": 0.0,
-    "minecartSuspensionStab": 0.0,
-    "minecartMaxFuelAmount": 100.0,
-    "minecartWheelsGrip": 0.20000000298023225
+    "unlockedVehicles": [
+        false,
+        false
+    ],
+    "minecart_4x4_UpgradeLevels": [
+        10,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+    ],
+    "minecart4x4Part": [
+        200.0,
+        0.30000001192092898,
+        60.0,
+        0.4399999976158142,
+        120.0
+    ],
+    "minecart_6x6_UpgradesLevel": [
+        0,
+        0,
+        0,
+        0
+    ],
+    "minecart6x6Upgrades": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+    ]
 }

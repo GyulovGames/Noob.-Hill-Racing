@@ -12,18 +12,26 @@ namespace YG
 
 
 
-        // Ваши сохранения
-        public int unlocckedTrails = 1;
+        // Обшие данные
+        public int savedCoins = 500;
         public bool sounds = true;
         public bool music = true;
+    
+        public bool[] unlockedVehicles = new bool[2];
         // ...
 
-        // Характеристики вагонетки
-        public float minecartEnginePower = 100f;
-        public float minecartFrontDirve = 0f;
-        public float minecartSuspensionStab = 0f;
-        public float minecartMaxFuelAmount = 100f;
-        public float minecartWheelsGrip = 0.2f;
+
+
+
+        //  Minecart4x4
+        public int[] minecart_4x4_UpgradeLevels = new int[9];
+        public float[] minecart4x4Part = new float[5];
+
         //
+
+        //  Minecart6x6
+        public int[] minecart_6x6_UpgradesLevel = new int[4];
+        public float[] minecart6x6Upgrades = new float[5];
+
     }
 }

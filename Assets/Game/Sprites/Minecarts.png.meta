@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Regular Minecart
+      name: Minecart
       rect:
         serializedVersion: 2
         x: 0
@@ -164,6 +164,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: LongMinecart
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 106
+        width: 47
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 194b9c7ef4543c842be86c4d8f5e2062
+      internalID: 99589632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -175,7 +196,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Regular Minecart: 1342613373
+      LongMinecart: 99589632
+      Minecart: 1342613373
       Regular Wheel: -1329838462
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
