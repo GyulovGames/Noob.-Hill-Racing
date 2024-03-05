@@ -1,41 +1,51 @@
 {
-    "idSave": 3568,
+    "idSave": 1578,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "savedCoins": 500,
-    "sounds": true,
-    "music": true,
-    "unlockedVehicles": [
+    "Coins_sdk": 500,
+    "Sounds_sdk": true,
+    "Music_sdk": true,
+    "Cars_sdk": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
         false,
         false
     ],
-    "minecart_4x4_UpgradeLevels": [
-        10,
-        3,
-        3,
-        2,
-        1,
+    "Car1_UpgradeLevels": [
         0,
         0,
         0,
-        0
-    ],
-    "minecart4x4Part": [
-        200.0,
-        0.30000001192092898,
-        60.0,
-        0.4399999976158142,
-        120.0
-    ],
-    "minecart_6x6_UpgradesLevel": [
+        0,
+        0,
         0,
         0,
         0,
         0
     ],
-    "minecart6x6Upgrades": [
+    "Car1_Parts": [
         0.0,
+        0.0,
+        0.0,
+        0.0
+    ],
+    "Car2_UpgradeLevels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car2_Parts": [
         0.0,
         0.0,
         0.0,

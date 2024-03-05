@@ -1,287 +1,119 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
 public class MenuCanvas : MonoBehaviour
 {
-    [SerializeField] private FadeController fadeController;
     [SerializeField] private MoveController moveController;
-    [Space(15)]
-    [SerializeField] private CanvasGroup smoothTransitionPanel;
-    [SerializeField] private CanvasGroup fadeBackgroundPanel;
-    [Space(15)]
-    [SerializeField] private RectTransform traillSelectionWindow;
-    [SerializeField] private RectTransform vehicleSelectionWindow;
-    [SerializeField] private RectTransform upgradeWindow;
+    [SerializeField] private FadeController fadeController;
+    [Space(10)]
     [SerializeField] private RectTransform settingsWindow;
     [SerializeField] private RectTransform allGamesWindow;
-    [SerializeField] private AudioSource buttonSoundsPlayerAudioSource;
-    [Space(15)]
-    [SerializeField] private Image soundsButtonImage;
-    [SerializeField] private Image musicButtonImage;
-    [SerializeField] private Text coinsIndicator;
-    [Space(15)]
-    [SerializeField] private Sprite toggleON;
-    [SerializeField] private Sprite toggleOFF;
-
-    [SerializeField] private Button engineButton;
-
-    [SerializeField] private GameObject[] prices;
-    [SerializeField] private GameObject[] select;
-    [SerializeField] private GameObject[] upgradeButtons;
-    [SerializeField] private GameObject[] vehiclesArray = new GameObject[0];
-
-    public  int currentCoinsAmmount;
-    private string carToUpgrade;
+    [SerializeField] private RectTransform transportWindow;
+    [SerializeField] private RectTransform shoppingWindow;
+    [Space(5)]
+    [SerializeField] private CanvasGroup fadeBackground1;
+    [SerializeField] private CanvasGroup fadeBackground2;
+    [Space(10)]
+    [SerializeField] private AudioSource buttonPlayer;
+    [Space(10)]
+    [SerializeField] private Image soundsToggleImage;
+    [SerializeField] private Image musicToggleImage;
+    [SerializeField] private Image purchaseImage;
+    [SerializeField] private Sprite onToggleSprite;
+    [SerializeField] private Sprite offtoggleSprite;
+    [SerializeField] private Text coinIndicator;
+    [SerializeField] private GameObject[] carsButtons;
+ 
+    private bool[] Cars = new bool[9];
+    private int carsAmount;
+    private int coins;
 
     public void Start()
     {
-        YandexGame.savesData.unlockedVehicles[0] = true;
-
-
-        YandexGame.SaveProgress();
-
-        LoadCoinsNumber();
-        LoadSoundsSettings();
-        LoadMusicSettings();
-        LoadUnlockedVehicles();
-        
-
-        CanvasGroup[] disapearGroup = new CanvasGroup[] { smoothTransitionPanel };
-        fadeController.Disappear(disapearGroup);
-
-        GameObject parent = GameObject.Find("button;");
-
-
+        DownloadDataFromSDK();
     }
 
-
-    public void MarkAsSelected(int index)
+    private void DownloadDataFromSDK()
     {
-        if (YandexGame.savesData.unlockedVehicles[index] )
-        {
-            foreach (GameObject obj in select)
-            {
-                obj.SetActive(false);
-            }
+        coins = YandexGame.savesData.Coins_sdk;
+        UpdateCoinsIndicator();
 
-            for (int i = 0; i < select.Length; i++)
+        carsAmount = YandexGame.savesData.Cars_sdk.Length;
+        for (int i = 0; i < carsAmount; i++)
+        {
+            Cars[i] = YandexGame.savesData.Cars_sdk[i];
+        }
+    }
+    private void MarkLockedUnlockedCars()
+    {
+        for(int i = 0; i < carsAmount;i++)
+        {
+            if (!Cars[i])
             {
-                if (i == index)
-                {
-                    select[i].SetActive(true);
-                }
+                Transform Price = carsButtons[i].transform.Find("Price");
+                Price.gameObject.SetActive(true);
             }
         }
     }
-
-    public void btn_ChooseCar(int carIndex)
+    private void UpdateCoinsIndicator()
     {
-        if (YandexGame.savesData.unlockedVehicles[carIndex] && !vehiclesArray[carIndex].activeSelf)
-        {
-            foreach(GameObject car in vehiclesArray)
-            {
-                car.SetActive(false);
-                car.transform.position = new Vector2(0, -1.25f);
-            }
+        coinIndicator.text = coins.ToString();
+        //Maybe some animations, and sounds
+    }
 
-            SwichCar(carIndex);
-            MarkAsSelected(carIndex);
+    public void ChoseCar(int carIndex)
+    {
+        if (Cars[carIndex])
+        {
+            YandexGame.savesData.SelectedCarIndex_sdk = carIndex;
+            Transform mark = carsButtons[carIndex].transform.Find("Mark");
+            mark.gameObject.SetActive(true);        
+        }
+        else
+        {
+
         }
     }
-
-    private void SwichCar(int index)
+    public void btn_OpenTransport()
     {
-        for (int i = 0; i < vehiclesArray.Length; i++)
-        {
-            if (i == index && YandexGame.savesData.unlockedVehicles[i])
-            {
-                vehiclesArray[i].SetActive(true);
-                carToUpgrade = vehiclesArray[i].name;
-            }
-        }
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBackground1);
+        moveController.MoveIn(transportWindow);
+        MarkLockedUnlockedCars();
     }
-    
-
-    public void LoadUnlockedVehicles()
+    public void btn_CloseTransport()
     {
-        int vehiclesNumber = YandexGame.savesData.unlockedVehicles.Length;
-
-        for(int i = 0; i < vehiclesNumber;  i++)
-        {
-            bool unlocked = YandexGame.savesData.unlockedVehicles[i];
-
-            if (!unlocked)
-            {
-                prices[i].SetActive(true);
-            }
-        }
+        buttonPlayer.Play();
+        moveController.MoveOut(transportWindow);
+        fadeController.FadeOut(fadeBackground1);
     }
-
-
-    private void UpdateTehnicalSpecificationsBars(int index)
+    public void btn_SoundsToggle()
     {
-        //switch()
-
-        //Slider engineSlider = GetComponentInChildren<Slider>();
-        //engineSlider.value = YandexGame.savesData.upgradesLevel[0];
-        //print(YandexGame.savesData.upgradesLevel[0]);
-    }
-
-    private void UpdateUpgradeButtonsSlider()
-    {
-
-    }
-
-    public void btn_Upgrade(string upgradePart)
-    {
-        switch (carToUpgrade)
-        {
-            case "Minecart4x4":
-                switch (upgradePart)
-                {
-                    case "engine":
-                        if (YandexGame.savesData.minecart_4x4_UpgradeLevels[0] != 10)
-                        {
-                            YandexGame.savesData.minecart_4x4_UpgradeLevels[0]++;
-                            YandexGame.savesData.minecart4x4Part[0] = 100 + 10 * YandexGame.savesData.minecart_4x4_UpgradeLevels[0];
-
-                            print(YandexGame.savesData.minecart_4x4_UpgradeLevels[0]);
-                            print(YandexGame.savesData.minecart4x4Part[0]);
-
-                            GameObject engineButton = upgradeButtons[0];
-                            Slider slider = engineButton.GetComponentInChildren<Slider>();
-                            slider.value = YandexGame.savesData.minecart_4x4_UpgradeLevels[0];
-
-                            if (YandexGame.savesData.minecart_4x4_UpgradeLevels[0] == 10)
-                            {
-                                Text priceText = engineButton.GetComponentInChildren<Text>();
-                                priceText.text = "MAX";
-                            }
-                        }
-                        break;
-                    case "suspension":
-                        if (YandexGame.savesData.minecart_4x4_UpgradeLevels[1] != 10)
-                        {
-                            YandexGame.savesData.minecart_4x4_UpgradeLevels[1]++;
-                            YandexGame.savesData.minecart4x4Part[1] = 0.1f * YandexGame.savesData.minecart_4x4_UpgradeLevels[1];
-                        }
-                        break;
-                    case "awd":
-                        if (YandexGame.savesData.minecart_4x4_UpgradeLevels[2] != 10)
-                        {
-                            YandexGame.savesData.minecart_4x4_UpgradeLevels[2]++;
-                            YandexGame.savesData.minecart4x4Part[2] = 20 * YandexGame.savesData.minecart_4x4_UpgradeLevels[2];
-                        }
-                        break;
-                    case "wheels":
-                        if (YandexGame.savesData.minecart_4x4_UpgradeLevels[3] != 10)
-                        {
-                            YandexGame.savesData.minecart_4x4_UpgradeLevels[3]++;
-                            YandexGame.savesData.minecart4x4Part[3] = 0.22f * YandexGame.savesData.minecart_4x4_UpgradeLevels[3];
-                        }
-                        break;
-                    case "canister":
-                        if (YandexGame.savesData.minecart_4x4_UpgradeLevels[4] != 10)
-                        {
-                            YandexGame.savesData.minecart_4x4_UpgradeLevels[4]++;
-                            YandexGame.savesData.minecart4x4Part[4] = 100 + 20 * YandexGame.savesData.minecart_4x4_UpgradeLevels[4];
-                        }
-                        break;
-                }                   
-                break;
-
-        }
-
-        YandexGame.SaveProgress();
-
-        //if (YandexGame.savesData.upgradesLevel[0] < 10)
-        //{
-        //    int nextUpgradeLevel = YandexGame.savesData.upgradesLevel[0];
-        //    nextUpgradeLevel++;
-        //    float currentEnginePower = YandexGame.savesData.minecartEnginePower * nextUpgradeLevel;
-
-        //    Slider engineSlider = GetComponentInChildren<Slider>();
-        //    engineSlider.value = nextUpgradeLevel;
-
-        //    YandexGame.savesData.minecartEnginePower = currentEnginePower;
-        //    YandexGame.savesData.upgradesLevel[0] = nextUpgradeLevel;
-        //    YandexGame.SaveProgress();
-
-        //    print(nextUpgradeLevel);
-        //}
-    }
-
-    private void LoadCoinsNumber()
-    {
-        currentCoinsAmmount = YandexGame.savesData.savedCoins;
-        coinsIndicator.text = currentCoinsAmmount.ToString();
-    }
-    private void LoadSoundsSettings()
-    {
-        bool sounds = YandexGame.savesData.sounds;
+        bool sounds = YandexGame.savesData.Sounds_sdk;
 
         if (sounds == true)
         {
-            buttonSoundsPlayerAudioSource.volume = 1f;
-            soundsButtonImage.sprite = toggleON;
+            buttonPlayer.volume = 0f;
+            soundsToggleImage.sprite = offtoggleSprite;
+            YandexGame.savesData.Sounds_sdk = false;
         }
         else if (sounds == false)
         {
-            buttonSoundsPlayerAudioSource.volume = 0f;
-            soundsButtonImage.sprite = toggleOFF;
-        }
-    }
-    private void LoadMusicSettings()
-    {
-        bool music = YandexGame.savesData.music;
-
-        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
-        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
-
-        if (music == true)
-        {
-            musicPlayerAudioSource.volume = 1f;
-            musicButtonImage.sprite = toggleON;
-        }
-        else if (music == false)
-        {
-            musicPlayerAudioSource.Stop();
-            musicPlayerAudioSource.volume = 0f;
-            musicButtonImage.sprite = toggleOFF;
-        }
-    }
-
-    public void btnSounds()
-    {
-        bool sounds = YandexGame.savesData.sounds;
-
-        if (sounds == true)
-        {
-            buttonSoundsPlayerAudioSource.volume = 0f;
-            soundsButtonImage.sprite = toggleOFF;
-            YandexGame.savesData.sounds = false;
-        }
-        else if (sounds == false)
-        {
-            buttonSoundsPlayerAudioSource.volume = 1f;
-            buttonSoundsPlayerAudioSource.Play();
-            soundsButtonImage.sprite = toggleON;
-            YandexGame.savesData.sounds = true;
+            buttonPlayer.volume = 1f;
+            buttonPlayer.Play();
+            soundsToggleImage.sprite = onToggleSprite;
+            YandexGame.savesData.Sounds_sdk = true;
         }
 
         YandexGame.SaveProgress();
     }
-    public void btnMusic()
+    public void btn_MusicToggle()
     {
-        buttonSoundsPlayerAudioSource.Play();
-        bool music = YandexGame.savesData.music;
+        buttonPlayer.Play();
+        bool music = YandexGame.savesData.Music_sdk;
 
         GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
         AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
@@ -289,90 +121,50 @@ public class MenuCanvas : MonoBehaviour
         if (music == true)
         {
             musicPlayerAudioSource.Pause();
-            musicButtonImage.sprite = toggleOFF;
-            YandexGame.savesData.music = false;
+            musicToggleImage.sprite = offtoggleSprite;
+            YandexGame.savesData.Music_sdk = false;
         }
         else if (music == false)
         {
             musicPlayerAudioSource.Play();
-            musicButtonImage.sprite = toggleON;
-            YandexGame.savesData.music = true;
+            musicToggleImage.sprite = onToggleSprite;
+            YandexGame.savesData.Music_sdk = true;
         }
 
         YandexGame.SaveProgress();
     }
-
-
-    public void btn_Settings()
+    public void btn_OpenSettings()
     {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Appear(groupToAppear);
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBackground1);
         moveController.MoveIn(settingsWindow);
     }
     public void btn_CloseSettings()
     {
-        buttonSoundsPlayerAudioSource.Play();
+        buttonPlayer.Play();
         moveController.MoveOut(settingsWindow);
-        CanvasGroup[] groupToDesappear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesappear);
+        fadeController.FadeOut(fadeBackground1);
     }
-    public void btn_AllGames()
+    public void btn_OpenAllGames()
     {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Appear(groupToAppear);
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBackground1);
         moveController.MoveIn(allGamesWindow);
     }
     public void btn_CloseAllGames()
     {
-        buttonSoundsPlayerAudioSource.Play();
+        buttonPlayer.Play();
         moveController.MoveOut(allGamesWindow);
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-    }
-    public void btn_Transport()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Appear(groupToAppear);
-        moveController.MoveIn(vehicleSelectionWindow);
-    }
-    public void btn_CloseTransport()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-        moveController.MoveOut(vehicleSelectionWindow);
-    }
-    public void btn_Traill()
-    {
-        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-        buttonSoundsPlayerAudioSource.Play();
-        fadeController.Appear(groupToAppear);
-        moveController.MoveIn(traillSelectionWindow);
-    }
-    public void btn_CloseTraill()
-    {
-        buttonSoundsPlayerAudioSource?.Play();
-        moveController.MoveOut(traillSelectionWindow);
-        CanvasGroup[] groupToDesppear = new CanvasGroup[] { fadeBackgroundPanel };
-        fadeController.Disappear(groupToDesppear);
-    }
-    public void btn_Play()
-    {
-        buttonSoundsPlayerAudioSource.Play();
-
-        CanvasGroup[] appearGroup = new CanvasGroup[] {smoothTransitionPanel };
-        fadeController.Appear(appearGroup);
-        StartCoroutine(LoadDelay("Level (1) Countryside"));
+        fadeController.FadeOut(fadeBackground1);
     }
 
-    private IEnumerator LoadDelay(string sceneName)
-    {
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(sceneName);       
-    }
+
+
+
+
+
+
+
 
 
 

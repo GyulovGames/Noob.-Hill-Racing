@@ -13,25 +13,26 @@ namespace YG
 
 
         // Обшие данные
-        public int savedCoins = 500;
-        public bool sounds = true;
-        public bool music = true;
-    
-        public bool[] unlockedVehicles = new bool[2];
+        public int Coins_sdk = 500;
+        public bool Sounds_sdk = true;
+        public bool Music_sdk = true;
+        public int SelectedCarIndex_sdk = 0;
+        public bool[] Cars_sdk = new bool[9];
         // ...
 
+        // Car1 
+        public int[] Car1_UpgradeLevels = new int[9];
+        public float[] Car1_Parts = new float[4];
+
+        //Car2
+        public int[] Car2_UpgradeLevels = new int[9];
+        public float[] Car2_Parts = new float[4];
 
 
 
-        //  Minecart4x4
-        public int[] minecart_4x4_UpgradeLevels = new int[9];
-        public float[] minecart4x4Part = new float[5];
-
-        //
-
-        //  Minecart6x6
-        public int[] minecart_6x6_UpgradesLevel = new int[4];
-        public float[] minecart6x6Upgrades = new float[5];
-
+        public SavesYG()
+        {
+            Cars_sdk[0] = true;
+        }
     }
 }
