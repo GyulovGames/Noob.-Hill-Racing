@@ -5,14 +5,12 @@ namespace YG
 {
     public partial class YandexGame
     {
-        public static JsonEnvironmentData EnvironmentData = new JsonEnvironmentData();
-
         // Initialization
 
         [DllImport("__Internal")]
         private static extern string InitEnvironmentData_js();
 
-        [InitBaisYG]
+        [InitYG]
         public static void InitEnvirData()
         {
 #if !UNITY_EDITOR
@@ -68,12 +66,6 @@ namespace YG
                 EnvironmentData.isTV = false;
             }
         }
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void ResetStaticEnvir()
-        {
-            EnvironmentData = new JsonEnvironmentData();
-        }
 #endif
 
 
@@ -91,8 +83,6 @@ namespace YG
             public string payload;
             public bool promptCanShow;
             public bool reviewCanShow;
-            public string platform = "Win32";
-            public string browser = "Other";
         }
     }
 }
