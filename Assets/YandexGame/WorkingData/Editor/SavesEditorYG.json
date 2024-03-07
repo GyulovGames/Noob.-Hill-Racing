@@ -1,15 +1,13 @@
 {
-    "idSave": 5,
+    "idSave": 1751,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "Coins_sdk": 0,
-    "Sounds_sdk": true,
-    "Music_sdk": true,
-    "SelectedCarIndex_sdk": 0,
-    "Cars_sdk": [
+    "Coins_sdk": 500,
+    "LastSelectedCar_sdk": 0,
+    "FreeCaras_sdk": [
         true,
-        true,
+        false,
         false,
         false,
         false,
@@ -17,5 +15,75 @@
         false,
         false,
         false
+    ],
+    "Car0_Upgrades": [
+        10,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car1_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car2_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car3_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car4_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car5_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car6_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car7_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car8_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "Car9_Upgrades": [
+        0,
+        0,
+        0,
+        0,
+        0
     ]
 }
