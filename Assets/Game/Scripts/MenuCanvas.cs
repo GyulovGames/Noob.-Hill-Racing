@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -37,7 +38,6 @@ public class MenuCanvas : MonoBehaviour
         DownloadData();
         UpdateCoinsIndicator();
         SpawnSelectedCar(LastSelectedCar);
-        UpdateUpgradeSliders(LastSelectedCar);
     }
 
 
@@ -51,7 +51,7 @@ public class MenuCanvas : MonoBehaviour
 
 
     private void UpdateUpgradeSliders(int carIndex)
-    {
+    {       
         switch (carIndex)
         {
             case 0:
@@ -62,11 +62,17 @@ public class MenuCanvas : MonoBehaviour
                 upgradeSliders[4].value = YandexGame.savesData.Car0_Upgrades[4];
                 break;
             case 1:
+                upgradeSliders[0].value = YandexGame.savesData.Car1_Upgrades[0];
+                upgradeSliders[1].value = YandexGame.savesData.Car1_Upgrades[1];
+                upgradeSliders[2].value = YandexGame.savesData.Car1_Upgrades[2];
+                upgradeSliders[3].value = YandexGame.savesData.Car1_Upgrades[3];
+                upgradeSliders[4].value = YandexGame.savesData.Car1_Upgrades[4];
                 break;
         }
 
         for(int i = 0; i < upgradeSliders.Length; i++)
         {
+
             if (upgradeSliders[i].value == 10)
             {
                 upgradePriceText[i].gameObject.SetActive(false);
@@ -86,6 +92,7 @@ public class MenuCanvas : MonoBehaviour
         newCar.transform.position = new Vector2(0, 2f);
         newCar.SetActive(true);
         LastSelectedCar = carIndex;
+        UpdateUpgradeSliders(LastSelectedCar);
         YandexGame.savesData.LastSelectedCar_sdk = carIndex;
         YandexGame.SaveProgress();
     }
@@ -129,25 +136,100 @@ public class MenuCanvas : MonoBehaviour
         fadeController.FadeIn(fadeBack2);
         moveController.MoveIn(coinsAdWindow);
     }
+    private int GetUpgradePrice( int partIndex)
+    {
+        int price = int.Parse(upgradePriceText[partIndex].text);
+        return price;
+    }
 
 
     public void btn_UpgradeButtons(int partIndex)
     {
-        switch(partIndex)
+        int upgradePrice = GetUpgradePrice(partIndex);
+
+        if(Coins >= upgradePrice)
         {
-            case 0:
+            Coins = Coins - upgradePrice;
+            UpdateCoinsIndicator();
 
-                switch (LastSelectedCar)
-                {
-                    case 0:
-                        upgradeSliders[partIndex].value += 1;
-                        YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
-                        YandexGame.SaveProgress();
-                        UpdateUpgradeSliders(LastSelectedCar);
-                        break;
-                }
-
-                break;
+            switch (LastSelectedCar)
+            {
+                case 0:
+                    switch (partIndex)
+                    {
+                        case 0:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 1:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 2:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 3:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 4:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car0_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (partIndex)
+                    {
+                        case 0:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car1_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 1:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car1_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 2:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car1_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 3:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car1_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                        case 4:
+                            upgradeSliders[partIndex].value += 1;
+                            YandexGame.savesData.Car1_Upgrades[partIndex] += 1;
+                            YandexGame.SaveProgress();
+                            UpdateUpgradeSliders(LastSelectedCar);
+                            break;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            fadeController.FadeIn(fadeBack2);
+            moveController.MoveIn(coinsAdWindow);
         }
     }
     public void btn_ChoseACar(int index)
@@ -161,12 +243,12 @@ public class MenuCanvas : MonoBehaviour
             Transform newMark = carButtons[index].transform.Find("Mark");
             oldMark.gameObject.SetActive(false);
             newMark.gameObject.SetActive(true);
-           // LastSelectedCar = index;
             SpawnSelectedCar(index);
+
         }
         else if( Coins >= GetPurcahsePrice(index))
         {
-            fadeController.FadeIn(fadeBack1);
+            fadeController.FadeIn(fadeBack2);
             moveController.MoveIn(shoppingWindow);
             CarToBuy = index;
         }
@@ -228,19 +310,12 @@ public class MenuCanvas : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //YandexGame.savesData.CarUpgrade_sdk[0, 0] = 5;
-
-            YandexGame.savesData. Car0_Upgrades[0] = 10;
-            YandexGame.savesData.Car0_Upgrades[1] = 5;
-            YandexGame.savesData.Car0_Upgrades[2] = 3;
-            YandexGame.savesData.Car0_Upgrades[3] = 4;
-            YandexGame.savesData.Car0_Upgrades[4] = 5;
-
-
-
-
+            YandexGame.savesData.Car0_Upgrades[0] = 1;
+            YandexGame.savesData.Car0_Upgrades[1] = 1;
+            YandexGame.savesData.Car0_Upgrades[2] = 1;
+            YandexGame.savesData.Car0_Upgrades[3] = 1;
+            YandexGame.savesData.Car0_Upgrades[4] = 1;
             YandexGame.SaveProgress();
-
             print("Save Progress!");
         }
 

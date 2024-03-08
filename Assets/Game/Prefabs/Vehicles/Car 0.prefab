@@ -130,7 +130,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.28}
-  m_ConnectedAnchor: {x: 0.41351184, y: 0.9450345}
+  m_ConnectedAnchor: {x: 0.41351128, y: 0.94503474}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -155,7 +155,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0000000745058, y: -0.25599995}
+  m_ConnectedAnchor: {x: 0.000000111758695, y: -0.25600004}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -540,7 +540,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.1, y: 0.52499986}
+  m_ConnectedAnchor: {x: -0.10000038, y: 0.52499986}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -680,7 +680,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.68000007}
+  m_ConnectedAnchor: {x: 0, y: 0.6800003}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -931,7 +931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7561533830246733191
 Transform:
   m_ObjectHideFlags: 0
@@ -1143,11 +1143,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelDrainSpeed: 0.01
-  gasFuelDrainSpeed: 0.05
+  fuelConsuptionRate: 0.1
+  gasFuelConsuptionRate: 0.5
   curentFuelAmount: 100
   vehicleRotationSpeed: 100
-  physicMaterial: {fileID: 0}
+  engineForce: 160
+  carDampinRatio: 0.1
+  frontWheelsForce: 0
+  wheelsGrip: 0.2
+  fuelVolume: 100
   noobAnimator: {fileID: 3820174291441060926}
   vehicleRigidBody: {fileID: 2445553032704342162}
   frontWheel_RigidBody: {fileID: 8399545180596562411}
@@ -1156,9 +1160,7 @@ MonoBehaviour:
   rearWheel_Joint: {fileID: 2941094303791517471}
   frontWheel_CircleCollider: {fileID: 7257085654723935550}
   rearWheel_CircleCollider: {fileID: 1422698033804967642}
-  enginePower: 0
-  frontDrive: 0
-  maxFuelAmount: 100
+  wheelsGripMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
 --- !u!1 &6406858442933891186
 GameObject:
   m_ObjectHideFlags: 0

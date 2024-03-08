@@ -143,7 +143,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Home
         m_Mode: 1
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Home
         m_Mode: 1
@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8582192938079222179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Home
         m_Mode: 1
@@ -915,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2278142594203936273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Home
         m_Mode: 1
@@ -1457,7 +1457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4715993416474281579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Home
         m_Mode: 1
@@ -2130,7 +2130,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4267452294394626581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameCanvas, Assembly-CSharp
         m_MethodName: btn_Pause
         m_Mode: 1
@@ -3615,7 +3615,7 @@ GameObject:
   - component: {fileID: 2346903496230915749}
   - component: {fileID: 6748223804195121354}
   - component: {fileID: 8565450689931145757}
-  - component: {fileID: 4267452294394626581}
+  - component: {fileID: 8297368605822353734}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: MainCanvas
@@ -3810,7 +3810,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4267452294394626581
+--- !u!114 &8297368605822353734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3824,33 +3824,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeController: {fileID: 1134166346941649154}
   moveController: {fileID: 8092160508260173384}
-  crashWariantCrash: {fileID: 1608079672442085828}
-  crashWariant2Fuel: {fileID: 8041614864603621658}
-  coinscounter: {fileID: 7700243271034507409}
-  smoothTransitionPanel: {fileID: 1555659700997034477}
-  fadeBackgroundPanel: {fileID: 2116576627049605427}
-  buttonSoundsPlayerAudioSource: {fileID: 4747048712932176097}
+  fuelOutText: {fileID: 8041614864603621658}
+  driverCrashText: {fileID: 1608079672442085828}
+  coinCounter: {fileID: 7700243271034507409}
+  smothTransitionPanel: {fileID: 1555659700997034477}
+  fadeBackgrounPanel: {fileID: 2116576627049605427}
   pauseWindow: {fileID: 4152264345930235467}
   resultWindow: {fileID: 8582192938079222179}
-  fuelBar: {fileID: 362522330785662654}
-  soundsButtonImage: {fileID: 8593598555609813261}
-  musicButtonImage: {fileID: 7133160419804413237}
+  soundsToggleImage: {fileID: 8593598555609813261}
+  musicToggleImage: {fileID: 7133160419804413237}
   fuelBarImage: {fileID: 4469320032644332208}
+  fuelBarSlider: {fileID: 362522330785662654}
+  buttonPlayer: {fileID: 4747048712932176097}
   toggleON: {fileID: -1602655457, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
   toggleOFF: {fileID: 356643302, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
-  fuelGradient:
+  fuelBarGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.9801799, g: 1, b: 0, a: 1}
-    key2: {r: 0.5764706, g: 0.9960785, b: 0, a: 0}
+    key1: {r: 0.963735, g: 1, b: 0, a: 1}
+    key2: {r: 0.5826187, g: 1, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 5783
-    ctime1: 30647
-    ctime2: 56090
+    ctime0: 3470
+    ctime1: 29298
+    ctime2: 60909
     ctime3: 0
     ctime4: 0
     ctime5: 0

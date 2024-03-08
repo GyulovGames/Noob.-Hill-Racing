@@ -1,228 +1,204 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEngine.UI;
-//using UnityEngine.SceneManagement;
-//using YG;
-//using System.Runtime.CompilerServices;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using YG;
 
-//public class GameCanvas : MonoBehaviour
-//{
-//    public static GameCanvas InstanceGC { get; set; }
+public class GameCanvas : MonoBehaviour
+{
+    public static GameCanvas Instance { get; set; }
 
-//    [SerializeField] private FadeController fadeController;
-//    [SerializeField] private MoveController moveController;
-//    [SerializeField] private Text crashWariantCrash;
-//    [SerializeField] private Text crashWariant2Fuel;
-//    [SerializeField] private Text coinscounter;
-//    [Space(15)]
-//    [SerializeField] private CanvasGroup smoothTransitionPanel;
-//    [SerializeField] private CanvasGroup fadeBackgroundPanel;
-//    [Space(15)]
-//    [SerializeField] private AudioSource buttonSoundsPlayerAudioSource;
-//    [SerializeField] private RectTransform pauseWindow;
-//    [SerializeField] private RectTransform resultWindow;
-//    [SerializeField] private Slider fuelBar;
-//    [SerializeField] private Image soundsButtonImage;
-//    [SerializeField] private Image musicButtonImage;
-//    [SerializeField] private Image fuelBarImage;
-//    [Space(15)]
-//    [SerializeField] private Sprite toggleON;
-//    [SerializeField] private Sprite toggleOFF;
-
-//    [SerializeField] private Gradient fuelGradient;
-
-//    public float horizontalInput;
-//    private float curentFuelAmount;
+    [SerializeField] private FadeController fadeController;
+    [SerializeField] private MoveController moveController;
 
 
-//    private void Awake()
-//    {
-//        if(InstanceGC == null) { InstanceGC = this; }
-//    }
+    [SerializeField] private Text fuelOutText;
+    [SerializeField] private Text driverCrashText;
+    [SerializeField] private Text coinCounter;
+    [Space(5)]
+    [SerializeField] private CanvasGroup smothTransitionPanel;
+    [SerializeField] private CanvasGroup fadeBackgrounPanel;
+    [SerializeField] private RectTransform pauseWindow;
+    [SerializeField] private RectTransform resultWindow;
+    [Space(5)]
+    [SerializeField] private Image soundsToggleImage;
+    [SerializeField] private Image musicToggleImage;
+    [SerializeField] private Image fuelBarImage;
+    [SerializeField] private Slider fuelBarSlider;
+    [SerializeField] private AudioSource buttonPlayer;
+    [Space(5)]
+    [SerializeField] private Sprite toggleON;
+    [SerializeField] private Sprite toggleOFF;
+    [SerializeField] private Gradient fuelBarGradient;
 
-//    public void Start()
-//    {
-//        OutSmoothTransition();
-//        LoadSoundsSettings();
-//        LoadMusicSettings();       
-//    }
+    public float horizontalInput;
 
-//    public void UpdateFuelBarOnStart(float vechicleFuelValue)
-//    {
-//        fuelBar.maxValue = vechicleFuelValue;
-//        fuelBar.value = vechicleFuelValue;
-//    }
 
-//    public void UpdateFuelBar(float fuelAmount)
-//    {
-//        fuelBar.value = fuelAmount;
-//        fuelBarImage.color = fuelGradient.Evaluate(fuelBar.normalizedValue);
 
-//        if(fuelAmount == 0)
-//        {
-//            Invoke("OpenLoseWindow", 2f);
-//        }
-//    }
+    private void Awake()
+    {
+        if(Instance == null) 
+        {
+            Instance = this; 
+        }
+    }
 
-//    private void OutSmoothTransition()
-//    {
-//        CanvasGroup[] disapearGroup = new CanvasGroup[] { smoothTransitionPanel };
-//      //  fadeController.FadeOut(disapearGroup);
-//    }   
+    public void Start()
+    {
+        RemoveSmothTransition();
+        LoadSoundsSettings();
+        LoadMusicSettings();
+    }
 
-//    private void LoadSoundsSettings()
-//    {
-//        bool sounds = YandexGame.savesData.sounds;
+    public void UpdateFuelBarOnStart(float fuelAmmountOnStart)
+    {
+        fuelBarSlider.maxValue = fuelAmmountOnStart;
+        fuelBarSlider.value = fuelAmmountOnStart;
+    }
+    public IEnumerator OpenResultWindow(string reason)
+    {
+        yield return new WaitForSeconds(2.75f);
+        fadeController.FadeIn(fadeBackgrounPanel);
+        moveController.MoveIn(resultWindow);
 
-//        if (sounds == true)
-//        {
-//            buttonSoundsPlayerAudioSource.volume = 1f;
-//            soundsButtonImage.sprite = toggleON;
-//        }
-//        else if (sounds == false)
-//        {
-//            buttonSoundsPlayerAudioSource.volume = 0f;
-//            soundsButtonImage.sprite = toggleOFF;
-//        }
-//    }
-//    private void LoadMusicSettings()
-//    {
-//        bool music = YandexGame.savesData.music;
+        if (reason == "Crash")
+        {
+            driverCrashText.enabled = true;
+        }
+        else if (reason == "FuelOut")
+        {
+            fuelOutText.enabled = true;
+        }
+    }
+    public void UpdateFuelbar(float currentFuelValue)
+    {
+        fuelBarSlider.value = currentFuelValue;
+        fuelBarImage.color = fuelBarGradient.Evaluate(fuelBarSlider.normalizedValue);
+    }
+    private void RemoveSmothTransition()
+    {
+        fadeController.FadeOut(smothTransitionPanel);
+    }
+    private void LoadSoundsSettings()
+    {
+        bool sounds = YandexGame.savesData.Sounds_sdk;
 
-//        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
-//        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+        if (sounds == true)
+        {
+            buttonPlayer.volume = 1f;
+            soundsToggleImage.sprite = toggleON;
+        }
+        else if (sounds == false)
+        {
+            buttonPlayer.volume = 0f;
+            soundsToggleImage.sprite = toggleOFF;
+        }
+    }
+    private void LoadMusicSettings()
+    {
+        GameObject musicPlayerObject = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayer = musicPlayerObject.GetComponent<AudioSource>();
 
-//        if (music == true)
-//        {
-//            musicPlayerAudioSource.volume = 1f;
-//            musicButtonImage.sprite = toggleON;
-//        }
-//        else if (music == false)
-//        {
-//            musicPlayerAudioSource.Stop();
-//            musicPlayerAudioSource.volume = 0f;
-//            musicButtonImage.sprite = toggleOFF;
-//        }
-//    }
+        bool music = YandexGame.savesData.Music_sdk;
 
-//    public void CoinsCollect()
-//    {
-//        int newNumber = int.Parse(coinscounter.text);
-//        newNumber += 5;
-//        coinscounter.text = newNumber.ToString();
-//    }
+        if (music == true)
+        {
+            musicPlayer.volume = 1f;
+            musicToggleImage.sprite = toggleON;
+        }
+        else if (music == false)
+        {
+            musicPlayer.Stop();
+            musicPlayer.volume = 0f;
+            musicToggleImage.sprite = toggleOFF;
+        }
+    }
+    private void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void CoinCounter()
+    {
+        int newnumber = int.Parse(coinCounter.text);
+        newnumber += 5;
+        coinCounter.text = newnumber.ToString();
+    }
 
-//    public IEnumerator OpenResultWindow(string reason)
-//    {
-//        yield return new WaitForSeconds(2.75f);
-//        moveController.MoveIn(resultWindow);
+    public void btn_Sounds()
+    {
+        bool sounds = YandexGame.savesData.Sounds_sdk;
 
-//        if(reason == "Crash")
-//        {
-//            crashWariantCrash.enabled = true;
-//            crashWariant2Fuel.enabled = false;
-//        }
-//        else if(reason == "Fuel")
-//        {
-//            crashWariantCrash.enabled = false;
-//            crashWariant2Fuel.enabled = true;
-//        }
-//    }
+        if (sounds == true)
+        {
+            buttonPlayer.volume = 0f;
+            soundsToggleImage.sprite = toggleOFF;
+            YandexGame.savesData.Sounds_sdk = false;
+        }
+        else if (sounds == false)
+        {
+            buttonPlayer.volume = 1f;
+            buttonPlayer.Play();
+            soundsToggleImage.sprite = toggleON;
+            YandexGame.savesData.Sounds_sdk = true;
+        }
 
-//    public void btnSounds()
-//    {
-//        bool sounds = YandexGame.savesData.sounds;
+        YandexGame.SaveProgress();
+    }
+    public void btn_Music()
+    {
+        buttonPlayer.Play();
+        GameObject musicplayerObject = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayer = musicplayerObject.GetComponent<AudioSource>();
 
-//        if (sounds == true)
-//        {
-//            buttonSoundsPlayerAudioSource.volume = 0f;
-//            soundsButtonImage.sprite = toggleOFF;
-//            YandexGame.savesData.sounds = false;
-//        }
-//        else if (sounds == false)
-//        {
-//            buttonSoundsPlayerAudioSource.volume = 1f;
-//            buttonSoundsPlayerAudioSource.Play();
-//            soundsButtonImage.sprite = toggleON;
-//            YandexGame.savesData.sounds = true;
-//        }
+        bool music = YandexGame.savesData.Music_sdk;
 
-//        YandexGame.SaveProgress();
-//    }
-//    public void btnMusic()
-//    {
-//        buttonSoundsPlayerAudioSource.Play();
-//        bool music = YandexGame.savesData.music;
+        if (music == true)
+        {
+            musicPlayer.Pause();
+            musicToggleImage.sprite = toggleOFF;
+            YandexGame.savesData.Music_sdk = false;
+        }
+        else if (music == false)
+        {
+            musicPlayer.Play();
+            musicToggleImage.sprite = toggleOFF;
+            YandexGame.savesData.Music_sdk = true;
+        }
 
-//        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
-//        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+        YandexGame.SaveProgress();
+    }
+    public void btn_Pause()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBackgrounPanel);
+        moveController.MoveIn(pauseWindow);
+    }
+    public void btn_Resume()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeOut(fadeBackgrounPanel);
+        moveController.MoveOut(pauseWindow);
+    }
+    public void btn_Home()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(smothTransitionPanel);
+        moveController.MoveIn(pauseWindow);
+        Invoke("LoadMainMenu", 2f);
+    }
+ 
+    #region PC_Control
+    private void Update()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+    }
+    #endregion
+    #region MB_Control
+    public void onbreakenter() { horizontalInput = -1f; }
+    public void onbreakexit() { horizontalInput = 0f; }
 
-//        if (music == true)
-//        {
-//            musicPlayerAudioSource.Pause();
-//            musicButtonImage.sprite = toggleOFF;
-//            YandexGame.savesData.music = false;
-//        }
-//        else if (music == false)
-//        {
-//            musicPlayerAudioSource.Play();
-//            musicButtonImage.sprite = toggleON;
-//            YandexGame.savesData.music = true;
-//        }
-
-//        YandexGame.SaveProgress();
-//    }
-
-//    public void btn_Pause()
-//    {
-//        buttonSoundsPlayerAudioSource.Play();
-
-//        CanvasGroup[] groupToAppear = new CanvasGroup[] { fadeBackgroundPanel };
-//      //  fadeController.FadeIn(groupToAppear);
-//        moveController.MoveIn(pauseWindow);
-//    }
-//    public void btn_Resume()
-//    {
-//        buttonSoundsPlayerAudioSource.Play();
-
-//        CanvasGroup[] groupToDisappear = new CanvasGroup[] { fadeBackgroundPanel };
-//     //   fadeController.FadeOut(groupToDisappear);
-//        moveController.MoveOut(pauseWindow);
-//    }
-//    public void btn_Home()
-//    {
-//        buttonSoundsPlayerAudioSource.Play();
-
-//        CanvasGroup[] appearGroup = new CanvasGroup[] { smoothTransitionPanel };
-//      //  fadeController.FadeIn(appearGroup);
-//        moveController.MoveOut(pauseWindow);
-//        StartCoroutine(LoadDelay("MainMenu"));
-//    }
-
-//    private IEnumerator LoadDelay(string sceneName)
-//    {
-//        yield return new WaitForSeconds(1);
-//        SceneManager.LoadScene(sceneName);
-//    }
-
-//    #region MB_Controll
-//    public void OnBreakEnter() { horizontalInput = -1f; }
-//    public void OnBreakExit() { horizontalInput = 0f; }
-
-//    public void OnGasEnter() { horizontalInput = 1f; }
-//    public void OnGasExit() { horizontalInput = 0f; }
-//    #endregion
-//    #region PC_Controll
-//    private void Update()
-//    {
-//        if (Input.GetKey(KeyCode.Space))
-//        {
-//            YandexGame.ResetSaveProgress();
-//            YandexGame.SaveProgress();
-//        }
-
-//        horizontalInput = Input.GetAxisRaw("Horizontal");
-//    }
-//    #endregion
-//}
+    public void ongasenter() { horizontalInput = 1f; }
+    public void ongasexit() { horizontalInput = 0f; }
+    #endregion
+}

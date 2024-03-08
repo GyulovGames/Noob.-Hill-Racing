@@ -10,10 +10,10 @@ namespace YG
         public string language = "ru";
         public bool promptDone;
 
-
-
         // Ваши сохранения
-        public int Coins_sdk = 500;
+        public bool Music_sdk;
+        public bool Sounds_sdk;
+        public int Coins_sdk = 1000;
         public int LastSelectedCar_sdk = 0;
         public bool[] FreeCaras_sdk = new bool[9];
 
@@ -27,11 +27,11 @@ namespace YG
         public int[] Car7_Upgrades = new int[5];
         public int[] Car8_Upgrades = new int[5];
         public int[] Car9_Upgrades = new int[5];
-
         // ...
 
         public SavesYG()
         {
+            Car0_Upgrades[3] = 5;
             FreeCaras_sdk[0] = true;
         }
     }
