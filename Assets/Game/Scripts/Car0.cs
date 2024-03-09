@@ -27,19 +27,30 @@ public class Car0 : MonoBehaviour
     [SerializeField] private CircleCollider2D rearWheel_CircleCollider;
     [Space(5)]
     [SerializeField] private PhysicsMaterial2D wheelsGripMaterial;
+    [SerializeField] private AudioSource engineSound;
+    public float changeSpeed;
+    public float desiredPitch;
 
     private bool stop = false;
-
-
-
+    public float carCurrentPitch = 0;
 
     private void Start()
     {
-        SetCarUpgrades();
-        UpdateOnStartUIFuelBar();
+        DownloadUpgrades();
+        UpdateFuelBarOnStart();
     }
 
-    private void SetCarUpgrades()
+
+    public void HitNoobHead()
+    {
+        if (!stop)
+        {
+            stop = true;
+            noobAnimator.SetBool("Dead", true);
+            StartCoroutine(GameCanvas.Instance.OpenResultWindow("driverCrash"));
+        }
+    }
+    private void DownloadUpgrades()
     {
         engineForce *= YandexGame.savesData.Car0_Upgrades[0];
 
@@ -56,31 +67,10 @@ public class Car0 : MonoBehaviour
 
         fuelVolume *= YandexGame.savesData.Car0_Upgrades[4];
     }
-    private void UpdateOnStartUIFuelBar()
+    private void UpdateFuelBarOnStart()
     {
         GameCanvas.Instance.UpdateFuelBarOnStart(fuelVolume);
     }
-
-
-
-    private void UpdateUIFuelBar(float horizontal)
-    {
-        if (horizontal > 0 || horizontal < 0)
-        {
-            curentFuelAmount -= Time.deltaTime * gasFuelConsuptionRate;
-        }
-        else
-        {
-            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;
-        }
-
-        if (curentFuelAmount <= 0)
-        {
-            stop = true;
-            StartCoroutine(GameCanvas.Instance.OpenResultWindow("FuelOut"));
-        }
-    }
-
     private void NoobAnimations(float value)
     {
         switch (value)
@@ -97,17 +87,30 @@ public class Car0 : MonoBehaviour
                 break;
         }
     }
-
-    public void HitNoobHead()
+    private void UpdateFuelBar(float horizontal)
     {
-        if (!stop)
+        if (horizontal > 0 || horizontal < 0)
+        {
+            curentFuelAmount -= Time.deltaTime * gasFuelConsuptionRate;
+        }
+        else
+        {
+            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;
+        }
+
+        GameCanvas.Instance.UpdateFuelbar(curentFuelAmount);
+
+        if (curentFuelAmount <= 0)
         {
             stop = true;
-            noobAnimator.SetBool("Dead", true);
-            StartCoroutine(GameCanvas.Instance.OpenResultWindow("driverCrash"));
-        }
+            StartCoroutine(GameCanvas.Instance.OpenResultWindow("FuelOut"));
+        }       
     }
-
+    public void EngineSoundControl(float horizontal)
+    {
+        engineSound.pitch = Mathf.Clamp(engineSound.pitch, 0f, 1.5f);
+        engineSound.pitch += horizontal * changeSpeed;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Canister")
@@ -123,17 +126,32 @@ public class Car0 : MonoBehaviour
         }
     }
 
+
     private void FixedUpdate()
     {
         if (!stop)
         {
             float horizontal = GameCanvas.Instance.horizontalInput;
+
             NoobAnimations(horizontal);
-            UpdateUIFuelBar(horizontal);
+            UpdateFuelBar(horizontal);
 
             rearWheel_RigidBody.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
             frontWheel_RigidBody.AddTorque(-horizontal * frontWheelsForce * Time.fixedDeltaTime);
             vehicleRigidBody.AddTorque(horizontal * vehicleRotationSpeed * Time.fixedDeltaTime);
+
+            carCurrentPitch = horizontal + vehicleRigidBody.velocity.x * 10f * Time.deltaTime;
+
+            if(carCurrentPitch > 1f)
+            {
+                engineSound.pitch = carCurrentPitch;
+
+                
+            }
+            else
+            {
+                engineSound.pitch = 1f;
+            }
         }
     }
 }

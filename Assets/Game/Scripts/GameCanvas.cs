@@ -32,7 +32,7 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private Sprite toggleOFF;
     [SerializeField] private Gradient fuelBarGradient;
 
-    public float horizontalInput;
+    /*[HideInInspector]*/ public float horizontalInput;
 
 
 
@@ -191,7 +191,9 @@ public class GameCanvas : MonoBehaviour
     #region PC_Control
     private void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+
+
+        horizontalInput = Input.GetAxis("Horizontal");
     }
     #endregion
     #region MB_Control
