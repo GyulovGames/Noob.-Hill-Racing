@@ -31,7 +31,6 @@ namespace YG
 
         public SavesYG()
         {
-            Car0_Upgrades[3] = 5;
             FreeCaras_sdk[0] = true;
         }
     }

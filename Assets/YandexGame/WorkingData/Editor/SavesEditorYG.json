@@ -1,5 +1,5 @@
 {
-    "idSave": 2287,
+    "idSave": 2340,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -19,11 +19,11 @@
         false
     ],
     "Car0_Upgrades": [
-        3,
+        2,
         3,
         2,
-        7,
-        0
+        2,
+        1
     ],
     "Car1_Upgrades": [
         0,
