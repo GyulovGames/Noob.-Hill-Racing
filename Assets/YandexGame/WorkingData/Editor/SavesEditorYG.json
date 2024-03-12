@@ -1,15 +1,15 @@
 {
-    "idSave": 2430,
+    "idSave": 2541,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "Music_sdk": false,
-    "Sounds_sdk": false,
-    "Coins_sdk": 0,
-    "LastSelectedCar_sdk": 0,
+    "Sounds_sdk": true,
+    "Coins_sdk": 250,
+    "LastSelectedCar_sdk": 1,
     "FreeCaras_sdk": [
         true,
-        false,
+        true,
         false,
         false,
         false,
@@ -19,10 +19,10 @@
         false
     ],
     "Car0_Upgrades": [
-        2,
-        2,
-        3,
-        2,
+        1,
+        1,
+        1,
+        1,
         1
     ],
     "Car1_Upgrades": [

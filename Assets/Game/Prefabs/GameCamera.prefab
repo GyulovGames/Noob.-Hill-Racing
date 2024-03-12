@@ -69,7 +69,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   folowSpeed: 0.115
-  cameraOffset: {x: 4, y: 0, z: -10}
+  cameraOffset: {x: 7, y: 0, z: -10}
   cameraTarget: {fileID: 0}
   carSpawnPoint: {fileID: 0}
   CarsArray:

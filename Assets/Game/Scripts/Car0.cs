@@ -12,8 +12,8 @@ public class Car0 : MonoBehaviour
     [SerializeField] private float engineForce;
     [SerializeField] private float carDampinRatio;
     [SerializeField] private float frontWheelsForce;
-    [SerializeField] private float wheelsGrip;
-    [SerializeField] private float curentFuelAmount;
+    [SerializeField] private float wheelsGrip;                    // Множимые не должны использоваться. Переделать.
+    [SerializeField] private float fuelAmount;
     [Space(5)]
 
     [SerializeField] private Rigidbody2D carRigidBody;
@@ -32,16 +32,48 @@ public class Car0 : MonoBehaviour
     [SerializeField] private AudioSource engineSoundPlayer       ;
     [SerializeField] private Animator noobAnimator;
 
+    public float curentFuelAmount;
     private bool stop = false;
     private float horizontal;
 
-    private void Start()
-    {
 
+    private void Awake()
+    {
         DownloadUpgrades();
-        UpdateFuelBarOnStart();
+
+        GameCanvas.PauseEvent.AddListener(PausePlay);
     }
 
+    private void Start()
+    {        
+        UpdateFuelBarOnStart();
+        PlayEngineSound();
+    }
+
+    private void PlayEngineSound()
+    {
+        bool sounds = YandexGame.savesData.Sounds_sdk;
+
+        if (sounds)
+        {
+            engineSoundPlayer.Play();
+        }
+    }
+    private void PausePlay()
+    {
+        if (stop)
+        {
+            stop = false;
+            engineSoundPlayer.Play();
+            carRigidBody.bodyType = RigidbodyType2D.Dynamic;
+        }
+        else
+        {
+            stop = true;
+            engineSoundPlayer.Stop();
+            carRigidBody.bodyType = RigidbodyType2D.Static;
+        }
+    }
     private void UserInput()
     {
         horizontal = GameCanvas.Instance.horizontalInput;
@@ -118,7 +150,7 @@ public class Car0 : MonoBehaviour
         frontWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
         rearWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
 
-        curentFuelAmount *= YandexGame.savesData.Car0_Upgrades[4];
+        curentFuelAmount = fuelAmount * YandexGame.savesData.Car0_Upgrades[4];
     }
     private void EngineSoundControl()
     {
@@ -202,8 +234,8 @@ public class Car0 : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Canister")
         {
-            curentFuelAmount = curentFuelAmount *= YandexGame.savesData.Car0_Upgrades[4];
-            GameCanvas.Instance.UpdateFuelbar(curentFuelAmount);
+            curentFuelAmount = fuelAmount * YandexGame.savesData.Car0_Upgrades[4];
+            GameCanvas.Instance.UpdateFuelBarOnStart(curentFuelAmount);
         }
     }
 }

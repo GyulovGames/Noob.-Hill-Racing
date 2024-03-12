@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7942808348219373544
 Transform:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e41c2e21e6596ab4885895a5a7e98a79, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -334,12 +334,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.1
   gasFuelConsuptionRate: 0.5
-  vehicleRotationSpeed: 350
-  engineForce: 100
+  vehicleRotationSpeed: 400
+  engineForce: 120
   carDampinRatio: 0.1
   frontWheelsForce: 160
   wheelsGrip: 0.2
-  curentFuelAmount: 100
+  fuelAmount: 100
   carRigidBody: {fileID: 3621997696207485473}
   frontWheel_RigidBody: {fileID: 3656326958109513148}
   rearWheel_RigidBody: {fileID: 5799056284251567784}
@@ -354,6 +354,7 @@ MonoBehaviour:
   rearWheel_Particles: {fileID: 1629024275320936965}
   engineSoundPlayer: {fileID: 3130743613256353885}
   noobAnimator: {fileID: 8309846950556053919}
+  curentFuelAmount: 100
 --- !u!1 &625488612650162631
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +486,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.6799998}
+  m_ConnectedAnchor: {x: 0, y: 0.6800003}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -5773,7 +5774,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.5499997}
+  m_ConnectedAnchor: {x: 0, y: 0.5500002}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -5997,7 +5998,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.28}
-  m_ConnectedAnchor: {x: 0.41351184, y: 0.9450345}
+  m_ConnectedAnchor: {x: 0.41351318, y: 0.94503474}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -6022,7 +6023,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0000000745058, y: -0.25599995}
+  m_ConnectedAnchor: {x: -0.00000064820046, y: -0.25599828}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -6184,7 +6185,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.1, y: 0.5250001}
+  m_ConnectedAnchor: {x: -0.099998474, y: 0.52499986}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

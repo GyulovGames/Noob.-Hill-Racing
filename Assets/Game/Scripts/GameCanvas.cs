@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using YG;
+using Unity.VisualScripting;
 
 public class GameCanvas : MonoBehaviour
 {
     public static GameCanvas Instance { get; set; }
+    public static UnityEvent PauseEvent = new UnityEvent();
 
     [SerializeField] private FadeController fadeController;
     [SerializeField] private MoveController moveController;
@@ -24,12 +27,12 @@ public class GameCanvas : MonoBehaviour
     [Space(5)]
     [SerializeField] private Image soundsToggleImage;
     [SerializeField] private Image musicToggleImage;
+    [SerializeField] private Sprite toggleON;
+    [SerializeField] private Sprite toggleOFF;
     [SerializeField] private Image fuelBarImage;
     [SerializeField] private Slider fuelBarSlider;
     [SerializeField] private AudioSource buttonPlayer;
     [Space(5)]
-    [SerializeField] private Sprite toggleON;
-    [SerializeField] private Sprite toggleOFF;
     [SerializeField] private Gradient fuelBarGradient;
 
     [HideInInspector] public float horizontalInput;
@@ -75,6 +78,11 @@ public class GameCanvas : MonoBehaviour
     {
         fuelBarSlider.value = currentFuelValue;
         fuelBarImage.color = fuelBarGradient.Evaluate(fuelBarSlider.normalizedValue);
+    }
+    private IEnumerator DelayLoad(int sceneIndex)
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneIndex);
     }
     private void RemoveSmothTransition()
     {
@@ -124,6 +132,83 @@ public class GameCanvas : MonoBehaviour
         newnumber += 5;
         coinCounter.text = newnumber.ToString();
     }
+    public void UpdateSoundsSettings()
+    {
+        bool Sounds = YandexGame.savesData.Sounds_sdk;
+
+        if (Sounds)
+        {
+            buttonPlayer.volume = 1f;
+            soundsToggleImage.sprite = toggleON;
+        }
+        else
+        {
+            buttonPlayer.volume = 0f;
+            soundsToggleImage.sprite = toggleOFF;
+        }
+    }
+    public void UpdateMusicSettings()
+    {
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+
+        bool Music = YandexGame.savesData.Music_sdk;
+
+        if (Music)
+        {
+            musicPlayerAudioSource.volume = 1f;
+            musicToggleImage.sprite = toggleON;
+        }
+        else
+        {
+            musicPlayerAudioSource.Stop();
+            musicPlayerAudioSource.volume = 0f;
+            musicToggleImage.sprite = toggleOFF;
+        }
+    }
+    public void btn_ChangeSounds()
+    {
+        bool Sounds = YandexGame.savesData.Sounds_sdk;
+
+        if (Sounds)
+        {
+            buttonPlayer.volume = 0f;
+            soundsToggleImage.sprite = toggleOFF;
+            YandexGame.savesData.Sounds_sdk = false;
+        }
+        else
+        {
+            buttonPlayer.volume = 1f;
+            buttonPlayer.Play();
+            soundsToggleImage.sprite = toggleON;
+            YandexGame.savesData.Sounds_sdk = true;
+        }
+
+        YandexGame.SaveProgress();
+    }
+    public void btn_ChangeMusic()
+    {
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+        bool Music = YandexGame.savesData.Music_sdk;
+        buttonPlayer.Play();
+
+        if (Music)
+        {
+            musicPlayerAudioSource.Pause();
+            musicToggleImage.sprite = toggleOFF;
+            YandexGame.savesData.Music_sdk = false;
+        }
+        else
+        {
+            musicPlayerAudioSource.Play();
+            musicToggleImage.sprite = toggleON;
+            YandexGame.savesData.Music_sdk = true;
+        }
+
+        YandexGame.SaveProgress();
+    }
+
 
     public void btn_Sounds()
     {
@@ -173,21 +258,29 @@ public class GameCanvas : MonoBehaviour
         buttonPlayer.Play();
         fadeController.FadeIn(fadeBackgrounPanel);
         moveController.MoveIn(pauseWindow);
+        PauseEvent.Invoke();
     }
     public void btn_Resume()
     {
         buttonPlayer.Play();
         fadeController.FadeOut(fadeBackgrounPanel);
-        moveController.MoveOut(pauseWindow);
+        PauseEvent.Invoke();
+    }
+    public void btn_Restart()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(smothTransitionPanel);
+        StartCoroutine(DelayLoad(1));
     }
     public void btn_Home()
     {
         buttonPlayer.Play();
+        moveController.MoveOut(pauseWindow);
         fadeController.FadeIn(smothTransitionPanel);
-        moveController.MoveIn(pauseWindow);
-        Invoke("LoadMainMenu", 2f);
+        StartCoroutine(DelayLoad(0));
+
     }
- 
+
     #region PC_Control
     private void Update()
     {

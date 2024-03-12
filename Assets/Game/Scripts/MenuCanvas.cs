@@ -1,6 +1,6 @@
 using System;
-using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
@@ -12,11 +12,18 @@ public class MenuCanvas : MonoBehaviour
     [SerializeField] private RectTransform carsWindow;
     [SerializeField] private RectTransform shoppingWindow;
     [SerializeField] private RectTransform coinsAdWindow;
+    [SerializeField] private RectTransform allGamesWindow;
+    [SerializeField] private RectTransform settingsWindow;
+    [SerializeField] private CanvasGroup smothTransition;
     [SerializeField] private CanvasGroup fadeBack1;
     [SerializeField] private CanvasGroup fadeBack2;
     [Space(5)]
     [SerializeField] private AudioSource buttonPlayer;
     [SerializeField] private Text coinsIndicator;
+    [SerializeField] private Image soundsButtonImage;
+    [SerializeField] private Image musicButtonImage;
+    [SerializeField] private Sprite toggleON;
+    [SerializeField] private Sprite toggleOFF;
     [Space(5)]
     [SerializeField] private GameObject[] carButtons;
     [SerializeField] private Slider[] upgradeSliders;
@@ -31,11 +38,19 @@ public class MenuCanvas : MonoBehaviour
     private int RoadToBuy;
     private int CarToBuy;
     private int Coins;
+    private bool Sounds;
+    private bool Music;
 
+
+    private void Awake()
+    {
+        DownloadData();
+    }
 
     private void Start()
     {
-        DownloadData();
+        UpdateMusicSettings();
+        UpdateSoundsSettings();
         UpdateCoinsIndicator();
         SpawnSelectedCar(LastSelectedCar);
     }
@@ -46,10 +61,9 @@ public class MenuCanvas : MonoBehaviour
         FreeCars = YandexGame.savesData.FreeCaras_sdk;
         LastSelectedCar = YandexGame.savesData.LastSelectedCar_sdk;
         Coins = YandexGame.savesData.Coins_sdk;
+        Sounds = YandexGame.savesData.Sounds_sdk;
+        Music = YandexGame.savesData.Music_sdk;
     }
-
-
-
     private void UpdateUpgradeSliders(int carIndex)
     {       
         switch (carIndex)
@@ -89,6 +103,7 @@ public class MenuCanvas : MonoBehaviour
         lastCar.SetActive(false);
 
         GameObject newCar = carsOnScene[carIndex];
+        newCar.transform.rotation = Quaternion.Euler(0, 0, 0);
         newCar.transform.position = new Vector2(0, 2f);
         newCar.SetActive(true);
         LastSelectedCar = carIndex;
@@ -141,10 +156,42 @@ public class MenuCanvas : MonoBehaviour
         int price = int.Parse(upgradePriceText[partIndex].text);
         return price;
     }
+    public void UpdateSoundsSettings()
+    {
+        if (Sounds)
+        {
+            buttonPlayer.volume = 1f;
+            soundsButtonImage.sprite = toggleON;
+        }
+        else
+        {
+            buttonPlayer.volume = 0f;
+            soundsButtonImage.sprite = toggleOFF;
+        }
+    }
+    public void UpdateMusicSettings()
+    {
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+
+        if (Music)
+        {
+            musicPlayerAudioSource.volume = 1f;
+            musicButtonImage.sprite = toggleON;
+        }
+        else
+        {
+            musicPlayerAudioSource.Stop();
+            musicPlayerAudioSource.volume = 0f;
+            musicButtonImage.sprite = toggleOFF;
+        }
+    }
+
 
 
     public void btn_UpgradeButtons(int partIndex)
     {
+        buttonPlayer.Play();
         int upgradePrice = GetUpgradePrice(partIndex);
 
         if(Coins >= upgradePrice)
@@ -299,7 +346,81 @@ public class MenuCanvas : MonoBehaviour
         fadeController.FadeOut(fadeBack2);
         moveController.MoveOut(coinsAdWindow);
     }
+    public void btn_OpenAllGames()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBack1);
+        moveController.MoveIn(allGamesWindow);
+    }
+    public void btn_CloseAllGAmes()
+    {
+        buttonPlayer.Play();
+        moveController.MoveOut(allGamesWindow);
+        fadeController.FadeOut(fadeBack1);
+    }
+    public void btn_OpenSettings()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(fadeBack1);
+        moveController.MoveIn(settingsWindow);
+    }
+    public void btn_CloseSettings()
+    {
+        buttonPlayer.Play();
+        moveController.MoveOut(settingsWindow);
+        fadeController.FadeOut(fadeBack1);
+    }
+    public void btn_ChangeSounds()
+    {
+        if (Sounds)
+        {
+            buttonPlayer.volume = 0f;
+            soundsButtonImage.sprite = toggleOFF;
+            YandexGame.savesData.Sounds_sdk = false;
+        }
+        else
+        {
+            buttonPlayer.volume = 1f;
+            buttonPlayer.Play();
+            soundsButtonImage.sprite = toggleON;
+            YandexGame.savesData.Sounds_sdk = true;
+        }
 
+        YandexGame.SaveProgress();
+    }
+    public void btn_ChangeMusic()
+    {     
+        GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+
+        buttonPlayer.Play();
+
+        if (Music)
+        {
+            musicPlayerAudioSource.Pause();
+            musicButtonImage.sprite = toggleOFF;
+            YandexGame.savesData.Music_sdk = false;
+        }
+        else 
+        {
+            musicPlayerAudioSource.Play();
+            musicButtonImage.sprite = toggleON;
+            YandexGame.savesData.Music_sdk = true;
+        }
+
+        YandexGame.SaveProgress();
+    }
+    public void btn_Play()
+    {
+        buttonPlayer.Play();
+        fadeController.FadeIn(smothTransition);
+        Invoke("DelayLoad", 1f);
+    }
+
+    private void DelayLoad()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 
 
