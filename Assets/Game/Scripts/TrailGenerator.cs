@@ -12,7 +12,7 @@ public class TrailGenerator : MonoBehaviour
 
     [SerializeField][Range(3f, 100f)] private int levelLenght = 30;
     [SerializeField][Range(1f, 50f)] private float xMultiplier = 2f;
-    [SerializeField][Range(1f, 50f)] private float yMultiplier = 2f;
+    [SerializeField][Range(1f, 100f)] private float yMultiplier = 2f;
     [SerializeField][Range(0f, 1f)] private float curveSmoothness = 0.5f;
 
     [SerializeField] private float noiseStep = 0.5f;
