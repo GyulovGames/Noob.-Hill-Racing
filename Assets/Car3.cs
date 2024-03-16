@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class Car0 : MonoBehaviour
+public class Car3 : MonoBehaviour
 {
     [SerializeField] private float fuelConsuptionRate;
     [SerializeField] private float gasFuelConsuptionRate;
@@ -30,7 +32,7 @@ public class Car0 : MonoBehaviour
     [SerializeField] private WheelGrounded rearWheelGround;
     [SerializeField] private ParticleSystem frontWheel_Particles;
     [SerializeField] private ParticleSystem rearWheel_Particles;
-    [SerializeField] private AudioSource engineSoundPlayer       ;
+    [SerializeField] private AudioSource engineSoundPlayer;
     [SerializeField] private Animator noobAnimator;
 
     public float curentFuelAmount;
@@ -46,7 +48,7 @@ public class Car0 : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         UpdateFuelBarOnStart();
         EngineSound();
     }
@@ -94,10 +96,10 @@ public class Car0 : MonoBehaviour
         frontWheel_RigidBody.AddTorque(-horizontal * frontWheelsForce * Time.fixedDeltaTime);
     }
     private void UpdateFuelBar()
-    {       
+    {
         if (horizontal == 0)
         {
-            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;                              
+            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;
         }
         else
         {
@@ -130,7 +132,7 @@ public class Car0 : MonoBehaviour
     }
     private void RotationControl()
     {
-        if(!frontWheelGround.wheelGrounded && rearWheelGround.wheelGrounded)
+        if (!frontWheelGround.wheelGrounded && rearWheelGround.wheelGrounded)
         {
             carRigidBody.AddTorque(horizontal * vehicleRotationSpeed * Time.fixedDeltaTime);
         }
@@ -161,7 +163,7 @@ public class Car0 : MonoBehaviour
         {
             engineSoundPlayer.pitch = carCurrentPitch;
         }
-        else if(carCurrentPitch < -1)
+        else if (carCurrentPitch < -1)
         {
             engineSoundPlayer.pitch = carCurrentPitch;
         }
@@ -224,7 +226,7 @@ public class Car0 : MonoBehaviour
             UpdateFuelBar();
             NoobAnimations();
             RotationControl();
-            EngineSoundControl();            
+            EngineSoundControl();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

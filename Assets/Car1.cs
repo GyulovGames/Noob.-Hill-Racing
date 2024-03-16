@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class Car0 : MonoBehaviour
+public class Car1 : MonoBehaviour
 {
     [SerializeField] private float fuelConsuptionRate;
     [SerializeField] private float gasFuelConsuptionRate;
@@ -18,11 +20,14 @@ public class Car0 : MonoBehaviour
 
     [SerializeField] private Rigidbody2D carRigidBody;
     [SerializeField] private Rigidbody2D frontWheel_RigidBody;
-    [SerializeField] private Rigidbody2D rearWheel_RigidBody;
+    [SerializeField] private Rigidbody2D rearWheel_RigidBody1;
+    [SerializeField] private Rigidbody2D rearWheel_RigidBody2;
     [SerializeField] private WheelJoint2D frontWheel_Joint;
-    [SerializeField] private WheelJoint2D rearWheel_Joint;
+    [SerializeField] private WheelJoint2D rearWheel_Joint1;
+    [SerializeField] private WheelJoint2D rearWheel_Joint2;
     [SerializeField] private CircleCollider2D frontWheel_CircleCollider;
-    [SerializeField] private CircleCollider2D rearWheel_CircleCollider;
+    [SerializeField] private CircleCollider2D rearWheel_CircleCollider1;
+    [SerializeField] private CircleCollider2D rearWheel_CircleCollider2;
     [SerializeField] private PhysicsMaterial2D wheelsPhysicsMaterial;
     [Space(5)]
 
@@ -30,7 +35,7 @@ public class Car0 : MonoBehaviour
     [SerializeField] private WheelGrounded rearWheelGround;
     [SerializeField] private ParticleSystem frontWheel_Particles;
     [SerializeField] private ParticleSystem rearWheel_Particles;
-    [SerializeField] private AudioSource engineSoundPlayer       ;
+    [SerializeField] private AudioSource engineSoundPlayer;
     [SerializeField] private Animator noobAnimator;
 
     public float curentFuelAmount;
@@ -46,7 +51,7 @@ public class Car0 : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         UpdateFuelBarOnStart();
         EngineSound();
     }
@@ -90,14 +95,15 @@ public class Car0 : MonoBehaviour
     }
     private void CarMovement()
     {
-        rearWheel_RigidBody.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
+        rearWheel_RigidBody2.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
+        rearWheel_RigidBody1.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
         frontWheel_RigidBody.AddTorque(-horizontal * frontWheelsForce * Time.fixedDeltaTime);
     }
     private void UpdateFuelBar()
-    {       
+    {
         if (horizontal == 0)
         {
-            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;                              
+            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;
         }
         else
         {
@@ -130,7 +136,7 @@ public class Car0 : MonoBehaviour
     }
     private void RotationControl()
     {
-        if(!frontWheelGround.wheelGrounded && rearWheelGround.wheelGrounded)
+        if (!frontWheelGround.wheelGrounded && rearWheelGround.wheelGrounded)
         {
             carRigidBody.AddTorque(horizontal * vehicleRotationSpeed * Time.fixedDeltaTime);
         }
@@ -138,30 +144,33 @@ public class Car0 : MonoBehaviour
     private void DownloadUpgrades()
     {
         frontWheelsForce = engineForce * 0.1f;
-        engineForce *= YandexGame.savesData.Car0_Upgrades[0];
+        engineForce *= YandexGame.savesData.Car1_Upgrades[0];
 
         JointSuspension2D suspension = frontWheel_Joint.suspension;
-        suspension.dampingRatio = carDampinRatio *= YandexGame.savesData.Car0_Upgrades[1];
+        suspension.dampingRatio = carDampinRatio *= YandexGame.savesData.Car1_Upgrades[1];
         frontWheel_Joint.suspension = suspension;
-        rearWheel_Joint.suspension = suspension;
+        rearWheel_Joint1.suspension = suspension;
+        rearWheel_Joint2.suspension = suspension;
 
-        frontWheelsForce *= YandexGame.savesData.Car0_Upgrades[2];
 
-        wheelsPhysicsMaterial.friction = wheelsGrip *= YandexGame.savesData.Car0_Upgrades[3];
+        frontWheelsForce *= YandexGame.savesData.Car1_Upgrades[2];
+
+        wheelsPhysicsMaterial.friction = wheelsGrip *= YandexGame.savesData.Car1_Upgrades[3];
         frontWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
-        rearWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
+        rearWheel_CircleCollider1.sharedMaterial = wheelsPhysicsMaterial;
+        rearWheel_CircleCollider2.sharedMaterial = wheelsPhysicsMaterial;
 
-        curentFuelAmount = fuelAmount * YandexGame.savesData.Car0_Upgrades[4];
+        curentFuelAmount = fuelAmount * YandexGame.savesData.Car1_Upgrades[4];
     }
     private void EngineSoundControl()
     {
-        float carCurrentPitch = horizontal + rearWheel_RigidBody.velocity.x * 10f * Time.deltaTime;
+        float carCurrentPitch = horizontal + carRigidBody.velocity.x * 10f * Time.deltaTime;
 
         if (carCurrentPitch > 1)
         {
             engineSoundPlayer.pitch = carCurrentPitch;
         }
-        else if(carCurrentPitch < -1)
+        else if (carCurrentPitch < -1)
         {
             engineSoundPlayer.pitch = carCurrentPitch;
         }
@@ -224,7 +233,7 @@ public class Car0 : MonoBehaviour
             UpdateFuelBar();
             NoobAnimations();
             RotationControl();
-            EngineSoundControl();            
+            EngineSoundControl();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

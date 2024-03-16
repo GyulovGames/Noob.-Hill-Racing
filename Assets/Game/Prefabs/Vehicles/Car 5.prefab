@@ -10377,7 +10377,6 @@ GameObject:
   - component: {fileID: 6439638172301938105}
   - component: {fileID: 6812394847687144038}
   - component: {fileID: 2190856326958849480}
-  - component: {fileID: 5702598165076569489}
   m_Layer: 0
   m_Name: Car 5
   m_TagString: Untagged
@@ -10394,7 +10393,7 @@ Transform:
   m_GameObject: {fileID: 7490857669110507133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.143, y: 5.576, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10720,41 +10719,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5702598165076569489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7490857669110507133}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.1
-  gasFuelConsuptionRate: 0.5
-  vehicleRotationSpeed: 400
-  engineForce: 120
-  carDampinRatio: 0.1
-  frontWheelsForce: 160
-  wheelsGrip: 0.2
-  fuelAmount: 100
-  carRigidBody: {fileID: 2801974293404282618}
-  frontWheel_RigidBody: {fileID: 5030588105438329281}
-  rearWheel_RigidBody: {fileID: 6511635438230970203}
-  frontWheel_Joint: {fileID: 6439638172301938105}
-  rearWheel_Joint: {fileID: 6812394847687144038}
-  frontWheel_CircleCollider: {fileID: 4401231154738455708}
-  rearWheel_CircleCollider: {fileID: 7569728843339173389}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 7272368203827409908}
-  rearWheelGround: {fileID: 6117446586856846402}
-  frontWheel_Particles: {fileID: 4030109878998392360}
-  rearWheel_Particles: {fileID: 3454109881635690810}
-  engineSoundPlayer: {fileID: 2190856326958849480}
-  noobAnimator: {fileID: 0}
-  curentFuelAmount: 100
 --- !u!1 &8895037433810028723
 GameObject:
   m_ObjectHideFlags: 0

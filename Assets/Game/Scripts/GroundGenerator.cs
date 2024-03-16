@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class GroundGenerator : MonoBehaviour
 {
     [SerializeField] private float disableDistance;
     [SerializeField] private float partLength;
-    [SerializeField] private float obstacleOffset;
-    [SerializeField] private float stalkingDistance;
-    [SerializeField] private Transform carTransform;
     [SerializeField] private Transform[] roadParts;
-    [SerializeField] private Transform obltacleTransform;
 
-    private void Update()
+    private Transform carTransform;
+
+    private void Start()
     {
-        RoadGenerate();
-        ObstacleMovement();
+        int selectedCar = YandexGame.savesData.LastSelectedCar_sdk;
+        VehicleArray vehicleArray = GameObject.FindGameObjectWithTag("VehicleArray").GetComponent<VehicleArray>();
+        carTransform = vehicleArray.vehicleTransform[selectedCar].transform;
     }
 
-    private void RoadGenerate()
+    private void Update()
     {
         float disablePosition = carTransform.position.x + disableDistance;
 
@@ -37,15 +37,6 @@ public class GroundGenerator : MonoBehaviour
             {
                 roadParts[i].gameObject.SetActive(true);
             }
-        }
-    }
-    private void ObstacleMovement()
-    {
-        float distance = Vector2.Distance(obltacleTransform.position, carTransform.position);
-
-        if (distance > stalkingDistance)
-        {
-            obltacleTransform.position = new Vector2(carTransform.position.x - obstacleOffset, 0);
         }
     }
 }

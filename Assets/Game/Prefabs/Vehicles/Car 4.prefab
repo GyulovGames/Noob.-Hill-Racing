@@ -562,7 +562,6 @@ GameObject:
   - component: {fileID: 6355078155253518345}
   - component: {fileID: 528676620324364484}
   - component: {fileID: 2140453162850191912}
-  - component: {fileID: 2920654626243907837}
   m_Layer: 0
   m_Name: Car 4
   m_TagString: Untagged
@@ -886,41 +885,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2920654626243907837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4643685758114790899}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.1
-  gasFuelConsuptionRate: 0.5
-  vehicleRotationSpeed: 400
-  engineForce: 120
-  carDampinRatio: 0.1
-  frontWheelsForce: 160
-  wheelsGrip: 0.2
-  fuelAmount: 100
-  carRigidBody: {fileID: 2751833841935376305}
-  frontWheel_RigidBody: {fileID: 7908179587591525732}
-  rearWheel_RigidBody: {fileID: 6519428684899643404}
-  frontWheel_Joint: {fileID: 6355078155253518345}
-  rearWheel_Joint: {fileID: 528676620324364484}
-  frontWheel_CircleCollider: {fileID: 3596341563863532432}
-  rearWheel_CircleCollider: {fileID: 2554561454704079235}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 854913554129481523}
-  rearWheelGround: {fileID: 6317133158534582986}
-  frontWheel_Particles: {fileID: 947396869361925522}
-  rearWheel_Particles: {fileID: 2638911976341481037}
-  engineSoundPlayer: {fileID: 2140453162850191912}
-  noobAnimator: {fileID: 0}
-  curentFuelAmount: 100
 --- !u!1 &5814555555830684177
 GameObject:
   m_ObjectHideFlags: 0
