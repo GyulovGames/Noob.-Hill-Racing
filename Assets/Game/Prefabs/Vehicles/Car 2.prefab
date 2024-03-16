@@ -5123,7 +5123,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.6800003}
+  m_ConnectedAnchor: {x: 0, y: 0.6799998}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -10390,7 +10390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7004578963918528638
 Transform:
   m_ObjectHideFlags: 0
@@ -10655,7 +10655,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e41c2e21e6596ab4885895a5a7e98a79, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -11221,7 +11221,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.54999924}
+  m_ConnectedAnchor: {x: 0, y: 0.5499997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -11508,7 +11508,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.28}
-  m_ConnectedAnchor: {x: 0.7605133, y: 0.86403465}
+  m_ConnectedAnchor: {x: 0.7605171, y: 0.86403465}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -11533,7 +11533,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0000013038515, y: -0.25600162}
+  m_ConnectedAnchor: {x: 0.00000086426724, y: -0.2560018}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

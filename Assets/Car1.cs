@@ -244,7 +244,7 @@ public class Car1 : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Canister")
         {
-            curentFuelAmount = fuelAmount * YandexGame.savesData.Car0_Upgrades[4];
+            curentFuelAmount = fuelAmount * YandexGame.savesData.Car1_Upgrades[4];
             GameCanvas.Instance.UpdateFuelBarOnStart(curentFuelAmount);
         }
     }

@@ -1,36 +1,43 @@
 {
-    "idSave": 2942,
+    "idSave": 4878,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "Music_sdk": false,
-    "Sounds_sdk": false,
-    "Coins_sdk": 4250,
-    "LastSelectedCar_sdk": 2,
+    "Music_sdk": true,
+    "Sounds_sdk": true,
+    "Coins_sdk": 40500,
+    "LastSelectedCar_sdk": 1,
+    "LastSelectedTrail_sdk": 4,
     "FreeCaras_sdk": [
         true,
-        false,
         true,
-        false,
-        false,
         false,
         false,
         false,
         false
     ],
+    "FreeTrails_sdk": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+    ],
     "Car0_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        10,
+        10,
+        10,
+        10,
+        10
     ],
     "Car1_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        10,
+        10,
+        10,
+        10,
+        10
     ],
     "Car2_Upgrades": [
         1,
@@ -40,52 +47,31 @@
         1
     ],
     "Car3_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
     ],
     "Car4_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
     ],
     "Car5_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
     ],
     "Car6_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
-    "Car7_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
-    "Car8_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
-    "Car9_Upgrades": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
     ]
 }

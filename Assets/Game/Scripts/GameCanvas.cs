@@ -65,6 +65,11 @@ public class GameCanvas : MonoBehaviour
         fadeController.FadeIn(fadeBackgrounPanel);
         moveController.MoveIn(resultWindow);
 
+        int coins = int.Parse(coinCounter.text);
+        YandexGame.savesData.Coins_sdk += coins;
+        YandexGame.SaveProgress();
+
+
         if (reason == "Crash")
         {
             driverCrashText.enabled = true;
@@ -166,6 +171,8 @@ public class GameCanvas : MonoBehaviour
             musicToggleImage.sprite = toggleOFF;
         }
     }
+
+
     public void btn_ChangeSounds()
     {
         bool Sounds = YandexGame.savesData.Sounds_sdk;
@@ -208,8 +215,6 @@ public class GameCanvas : MonoBehaviour
 
         YandexGame.SaveProgress();
     }
-
-
     public void btn_Sounds()
     {
         bool sounds = YandexGame.savesData.Sounds_sdk;
@@ -274,24 +279,27 @@ public class GameCanvas : MonoBehaviour
     }
     public void btn_Home()
     {
+        int coins = int.Parse(coinCounter.text);
+        YandexGame.savesData.Coins_sdk += coins;
+        YandexGame.SaveProgress();
+
         buttonPlayer.Play();
         moveController.MoveOut(pauseWindow);
         fadeController.FadeIn(smothTransitionPanel);
-        StartCoroutine(DelayLoad(0));
-
+        StartCoroutine(DelayLoad(7));
     }
 
     #region PC_Control
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+      //  horizontalInput = Input.GetAxis("Horizontal");
     }
     #endregion
     #region MB_Control
-    public void onbreakenter() { horizontalInput = -1f; }
-    public void onbreakexit() { horizontalInput = 0f; }
+    public void onbreakenter() { horizontalInput = -1f; print("b"); }
+    public void onbreakexit() { horizontalInput = 0f; print("b"); }
 
-    public void ongasenter() { horizontalInput = 1f; }
-    public void ongasexit() { horizontalInput = 0f; }
+    public void ongasenter() { horizontalInput = 1f; print("b"); }
+    public void ongasexit() { horizontalInput = 0f; print("b"); }
     #endregion
 }
