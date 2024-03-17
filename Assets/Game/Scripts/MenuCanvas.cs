@@ -20,6 +20,7 @@ public class MenuCanvas : MonoBehaviour
     [SerializeField] private CanvasGroup fadeBack2;
     [Space(5)]
     [SerializeField] private AudioSource buttonPlayer;
+    [SerializeField] private AudioSource purchasePlayer;
     [SerializeField] private Text coinsIndicator;
     [SerializeField] private Image soundsButtonImage;
     [SerializeField] private Image musicButtonImage;
@@ -38,9 +39,9 @@ public class MenuCanvas : MonoBehaviour
     [SerializeField] private Sprite[] trailImages;
 
     private bool[] FreeCars = new bool[6];
-    public bool[] FreeTrails = new bool[7];
+    public bool[] FreeTrails = new bool[8];
     private int LastSelectedCar;
-    private int LaseSelectedTrail;
+    public int LaseSelectedTrail;
     private string purchaseTip;
     private int priceToPay;
     private int TrailToBuy;
@@ -256,7 +257,7 @@ public class MenuCanvas : MonoBehaviour
 
     private void UpdateFreeTrails()
     {
-        for(int i = 0; i < FreeTrails.Length; i++)
+        for(int i = 1; i < FreeTrails.Length; i++)
         {
             if (FreeTrails[i])
             {
@@ -321,6 +322,8 @@ public class MenuCanvas : MonoBehaviour
 
         if(Coins >= upgradePrice)
         {
+            purchasePlayer.Play();
+
             Coins = Coins - upgradePrice;
             UpdateCoinsIndicator();
 
@@ -600,8 +603,10 @@ public class MenuCanvas : MonoBehaviour
     public void btn_ConfirmPurchase_Yes()
     {
         buttonPlayer.Play();
+        purchasePlayer.Play();
 
-        if(purchaseTip == "Car")
+
+        if (purchaseTip == "Car")
         {
             FreeCars[CarToBuy] = true;
             moveController.MoveOut(shoppingWindow);
@@ -696,12 +701,14 @@ public class MenuCanvas : MonoBehaviour
     {
         if (Sounds)
         {
+            Sounds = false;
             buttonPlayer.volume = 0f;
             soundsButtonImage.sprite = toggleOFF;
             YandexGame.savesData.Sounds_sdk = false;
         }
         else
         {
+            Sounds = true;
             buttonPlayer.volume = 1f;
             buttonPlayer.Play();
             soundsButtonImage.sprite = toggleON;
@@ -719,12 +726,14 @@ public class MenuCanvas : MonoBehaviour
 
         if (Music)
         {
+            Music = false;
             musicPlayerAudioSource.Pause();
             musicButtonImage.sprite = toggleOFF;
             YandexGame.savesData.Music_sdk = false;
         }
         else 
         {
+            Music = true;
             musicPlayerAudioSource.Play();
             musicButtonImage.sprite = toggleON;
             YandexGame.savesData.Music_sdk = true;

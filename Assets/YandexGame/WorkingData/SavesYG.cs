@@ -15,9 +15,9 @@ namespace YG
         public bool Sounds_sdk = true;
         public int Coins_sdk = 50000;
         public int LastSelectedCar_sdk = 0;
-        public int LastSelectedTrail_sdk = 0;
+        public int LastSelectedTrail_sdk = 1;
         public bool[] FreeCaras_sdk = new bool[6];
-        public bool[] FreeTrails_sdk = new bool[7];
+        public bool[] FreeTrails_sdk = new bool[8];
 
         public int[] Car0_Upgrades = new int[5];
         public int[] Car1_Upgrades = new int[5];
@@ -31,7 +31,7 @@ namespace YG
         public SavesYG()
         {
             FreeCaras_sdk[0] = true;
-            FreeTrails_sdk[0] = true;
+            FreeTrails_sdk[1] = true;
 
             Car0_Upgrades[0] = 1;
             Car0_Upgrades[1] = 1;

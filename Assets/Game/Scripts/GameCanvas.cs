@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using YG;
 using Unity.VisualScripting;
+using System;
 
 public class GameCanvas : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private Text fuelOutText;
     [SerializeField] private Text driverCrashText;
     [SerializeField] private Text coinCounter;
+    [SerializeField] private Text resultWindowCoinCounter;
     [Space(5)]
     [SerializeField] private CanvasGroup smothTransitionPanel;
     [SerializeField] private CanvasGroup fadeBackgrounPanel;
     [SerializeField] private RectTransform pauseWindow;
     [SerializeField] private RectTransform resultWindow;
+    [SerializeField] private GameObject MB_Control;
     [Space(5)]
     [SerializeField] private Image soundsToggleImage;
     [SerializeField] private Image musicToggleImage;
@@ -36,6 +39,8 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private Gradient fuelBarGradient;
 
     [HideInInspector] public float horizontalInput;
+
+    private bool isDesctop = true;
 
 
 
@@ -52,6 +57,7 @@ public class GameCanvas : MonoBehaviour
         RemoveSmothTransition();
         LoadSoundsSettings();
         LoadMusicSettings();
+        DefineUserDevice();
     }
 
     public void UpdateFuelBarOnStart(float fuelAmmountOnStart)
@@ -69,14 +75,16 @@ public class GameCanvas : MonoBehaviour
         YandexGame.savesData.Coins_sdk += coins;
         YandexGame.SaveProgress();
 
+        resultWindowCoinCounter.text = coins.ToString();
+
 
         if (reason == "Crash")
         {
-            driverCrashText.enabled = true;
+            driverCrashText.gameObject.SetActive(true);
         }
         else if (reason == "FuelOut")
         {
-            fuelOutText.enabled = true;
+            fuelOutText.gameObject.SetActive(true);
         }
     }
     public void UpdateFuelbar(float currentFuelValue)
@@ -131,6 +139,30 @@ public class GameCanvas : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    private void DefineUserDevice()
+    {
+        string userDevice = YandexGame.EnvironmentData.deviceType.ToString();
+
+        switch (userDevice)
+        {
+            case "desktop":
+                isDesctop = true;
+                MB_Control.SetActive(false);
+                break;
+            case "mobile":
+                isDesctop = false;
+                MB_Control.SetActive(true);
+                break;
+            case "tablet":
+                isDesctop = false;
+                MB_Control.SetActive(true);
+                break;
+            default:
+                isDesctop = false;
+                MB_Control.SetActive(true);
+                break;
+        }
+    }
     public void CoinCounter()
     {
         int newnumber = int.Parse(coinCounter.text);
@@ -171,8 +203,7 @@ public class GameCanvas : MonoBehaviour
             musicToggleImage.sprite = toggleOFF;
         }
     }
-
-
+    
     public void btn_ChangeSounds()
     {
         bool Sounds = YandexGame.savesData.Sounds_sdk;
@@ -269,13 +300,16 @@ public class GameCanvas : MonoBehaviour
     {
         buttonPlayer.Play();
         fadeController.FadeOut(fadeBackgrounPanel);
+        moveController.MoveOut(pauseWindow);
         PauseEvent.Invoke();
     }
     public void btn_Restart()
     {
         buttonPlayer.Play();
         fadeController.FadeIn(smothTransitionPanel);
-        StartCoroutine(DelayLoad(1));
+
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        StartCoroutine(DelayLoad(sceneIndex));
     }
     public void btn_Home()
     {
@@ -286,20 +320,23 @@ public class GameCanvas : MonoBehaviour
         buttonPlayer.Play();
         moveController.MoveOut(pauseWindow);
         fadeController.FadeIn(smothTransitionPanel);
-        StartCoroutine(DelayLoad(7));
+        StartCoroutine(DelayLoad(0));
     }
 
     #region PC_Control
     private void Update()
     {
-      //  horizontalInput = Input.GetAxis("Horizontal");
+        if (isDesctop)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+        }
     }
     #endregion
     #region MB_Control
-    public void onbreakenter() { horizontalInput = -1f; print("b"); }
-    public void onbreakexit() { horizontalInput = 0f; print("b"); }
+    public void onbreakenter() { horizontalInput = -1f;}
+    public void onbreakexit() { horizontalInput = 0f;}
 
-    public void ongasenter() { horizontalInput = 1f; print("b"); }
-    public void ongasexit() { horizontalInput = 0f; print("b"); }
+    public void ongasenter() { horizontalInput = 1f;}
+    public void ongasexit() { horizontalInput = 0f;}
     #endregion
 }

@@ -5,20 +5,27 @@ using UnityEngine.Events;
 
 public class NoobHead : MonoBehaviour
 {
+    [SerializeField] private AudioSource crackPlayer;
     [SerializeField] private HingeJoint2D hingeJoint2D;
-
+    [Space(10)]
     public UnityEvent headHit;
+
+    private bool isBroken = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
-            headHit.Invoke();
-            JointAngleLimits2D limith = hingeJoint2D.limits;
-            limith.max = 80;
-            limith.min = -80;
-            hingeJoint2D.limits = limith;
-            
+            if (!isBroken)
+            {
+                isBroken = true;
+                headHit.Invoke();
+                crackPlayer.Play();
+                JointAngleLimits2D limith = hingeJoint2D.limits;
+                limith.max = 80;
+                limith.min = -80;
+                hingeJoint2D.limits = limith;
+            }         
         }
     }
 }

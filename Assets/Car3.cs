@@ -87,7 +87,7 @@ public class Car3 : MonoBehaviour
         {
             stop = true;
             noobAnimator.SetBool("Dead", true);
-            StartCoroutine(GameCanvas.Instance.OpenResultWindow("driverCrash"));
+            StartCoroutine(GameCanvas.Instance.OpenResultWindow("Crash"));
         }
     }
     private void CarMovement()
