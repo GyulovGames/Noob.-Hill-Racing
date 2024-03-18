@@ -206,6 +206,8 @@ public class GameCanvas : MonoBehaviour
     
     public void btn_ChangeSounds()
     {
+        AudioSource[] allAudios = FindObjectsOfType<AudioSource>();
+
         bool Sounds = YandexGame.savesData.Sounds_sdk;
 
         if (Sounds)
@@ -213,6 +215,15 @@ public class GameCanvas : MonoBehaviour
             buttonPlayer.volume = 0f;
             soundsToggleImage.sprite = toggleOFF;
             YandexGame.savesData.Sounds_sdk = false;
+
+            foreach (AudioSource audioSource in allAudios)
+            {
+                if (audioSource.gameObject.tag != "MusicPlayer")
+                {
+
+                    audioSource.volume = 0f;
+                }
+            }
         }
         else
         {
@@ -220,6 +231,14 @@ public class GameCanvas : MonoBehaviour
             buttonPlayer.Play();
             soundsToggleImage.sprite = toggleON;
             YandexGame.savesData.Sounds_sdk = true;
+
+            foreach (AudioSource audioSource in allAudios)
+            {
+                if (audioSource.gameObject.tag != "MusicPlayer")
+                {
+                    audioSource.volume = 1f;
+                }
+            }
         }
 
         YandexGame.SaveProgress();
@@ -255,6 +274,7 @@ public class GameCanvas : MonoBehaviour
             buttonPlayer.volume = 0f;
             soundsToggleImage.sprite = toggleOFF;
             YandexGame.savesData.Sounds_sdk = false;
+            
         }
         else if (sounds == false)
         {
@@ -262,6 +282,8 @@ public class GameCanvas : MonoBehaviour
             buttonPlayer.Play();
             soundsToggleImage.sprite = toggleON;
             YandexGame.savesData.Sounds_sdk = true;
+
+            
         }
 
         YandexGame.SaveProgress();

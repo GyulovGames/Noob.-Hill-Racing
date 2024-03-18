@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8236347872691688472}
   - component: {fileID: 7953969473953073869}
   - component: {fileID: 955048312115480823}
+  - component: {fileID: 3338091708179090441}
   - component: {fileID: 7550882340272835391}
   - component: {fileID: 6386635768002563589}
   - component: {fileID: 3518467084909705096}
@@ -184,6 +185,41 @@ PolygonCollider2D:
       - {x: 1.4376793, y: 0.43759155}
       - {x: 1.4375, y: 0.9375}
   m_UseDelaunayMesh: 0
+--- !u!58 &3338091708179090441
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22783623051503213}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.79, y: 0.66}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!235 &7550882340272835391
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -392,8 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0cf0597d4ca8a46aea2808e913e106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.01
-  gasFuelConsuptionRate: 0.01
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 2
   vehicleRotationSpeed: 300
   engineForce: 150
   carDampinRatio: 0.1
@@ -5972,7 +6008,7 @@ GameObject:
   m_TagString: VehicleArray
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7215246999891003347
 Transform:
@@ -6560,6 +6596,7 @@ GameObject:
   - component: {fileID: 3973516119669648492}
   - component: {fileID: 8313971178412674094}
   - component: {fileID: 4510262726120796558}
+  - component: {fileID: 4649998953197226643}
   - component: {fileID: 963936454773326742}
   - component: {fileID: 5910814418770834267}
   - component: {fileID: 5252666387681728951}
@@ -6741,6 +6778,41 @@ PolygonCollider2D:
       - {x: 0.68, y: 0.24}
       - {x: 0.84999996, y: 0.32999998}
   m_UseDelaunayMesh: 0
+--- !u!58 &4649998953197226643
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522495295350615660}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.71, y: 0.45}
+  serializedVersion: 2
+  m_Radius: 0.9
 --- !u!235 &963936454773326742
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -6781,7 +6853,7 @@ WheelJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.81, y: -0.06}
+  m_Anchor: {x: -0.81, y: -0.08}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
@@ -6899,8 +6971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b374c42f104f51946850039c3dc81d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.1
-  gasFuelConsuptionRate: 0.3
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 1.2
   vehicleRotationSpeed: 300
   engineForce: 150
   carDampinRatio: 0.1
@@ -7052,7 +7124,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.55}
+  m_ConnectedAnchor: {x: 0, y: 0.5499997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -17666,6 +17738,7 @@ GameObject:
   - component: {fileID: 2822369283982983036}
   - component: {fileID: 1956231406041305999}
   - component: {fileID: 2618044504440477672}
+  - component: {fileID: 4640232218197603726}
   - component: {fileID: 2105201000711343728}
   - component: {fileID: 3829869245771959368}
   - component: {fileID: 149928396695216627}
@@ -17835,6 +17908,41 @@ PolygonCollider2D:
       - {x: 1.0000005, y: 0.37539768}
       - {x: 1, y: 0.875}
   m_UseDelaunayMesh: 0
+--- !u!58 &4640232218197603726
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905873765559919176}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.39, y: 0.7}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!235 &2105201000711343728
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -17993,8 +18101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327e419b32e9b34faebe6729343df90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.3
-  gasFuelConsuptionRate: 1
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 1.2
   vehicleRotationSpeed: 400
   engineForce: 120
   carDampinRatio: 0.1
@@ -24356,7 +24464,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.28}
-  m_ConnectedAnchor: {x: 0.7605146, y: 0.86403453}
+  m_ConnectedAnchor: {x: 0.7605171, y: 0.86403465}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -24381,7 +24489,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.000000029802319, y: -0.256}
+  m_ConnectedAnchor: {x: 0.00000086426724, y: -0.2560018}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -29316,6 +29424,7 @@ GameObject:
   - component: {fileID: 2749241545631423417}
   - component: {fileID: 6107641262819665925}
   - component: {fileID: 1669920247993100347}
+  - component: {fileID: 6428350691890442882}
   - component: {fileID: 1662980757741992189}
   - component: {fileID: 3967479982915259802}
   - component: {fileID: 2447298004855891278}
@@ -29488,6 +29597,41 @@ PolygonCollider2D:
       - {x: 1.46875, y: 0.37539434}
       - {x: 1.46875, y: 0.875}
   m_UseDelaunayMesh: 0
+--- !u!58 &6428350691890442882
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549904231962243512}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.75, y: 0.67}
+  serializedVersion: 2
+  m_Radius: 1.07
 --- !u!235 &1662980757741992189
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -29503,11 +29647,11 @@ WheelJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 1, y: -0.06}
+  m_Anchor: {x: 1, y: -0.07}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
-    m_Frequency: 5
+    m_Frequency: 5.2
     m_Angle: 90
   m_UseMotor: 0
   m_Motor:
@@ -29716,8 +29860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe03966be2bf664ab72c1c89a30e4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.01
-  gasFuelConsuptionRate: 0.03
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 1.7
   vehicleRotationSpeed: 300
   engineForce: 150
   carDampinRatio: 0.1
@@ -55306,7 +55450,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.67999995}
+  m_ConnectedAnchor: {x: 0, y: 0.6799998}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -60787,7 +60931,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.29
 --- !u!114 &1217218604007892588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60899,6 +61043,7 @@ GameObject:
   - component: {fileID: 2028091439570977884}
   - component: {fileID: 1649209501857271844}
   - component: {fileID: 7931611930432090422}
+  - component: {fileID: 3696982728881468648}
   - component: {fileID: 6590326049186772062}
   - component: {fileID: 6674835296326667137}
   - component: {fileID: 2039222896967099439}
@@ -61144,6 +61289,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14870453, y: 0.36717176}
   m_EdgeRadius: 0
+--- !u!58 &3696982728881468648
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340697036956245914}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.69, y: 0.49}
+  serializedVersion: 2
+  m_Radius: 1.1
 --- !u!235 &6590326049186772062
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -61159,7 +61339,7 @@ WheelJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 1, y: -0.06}
+  m_Anchor: {x: 1, y: -0.08}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
@@ -61184,7 +61364,7 @@ WheelJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.95, y: -0.06}
+  m_Anchor: {x: -0.95, y: -0.07}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
@@ -61302,8 +61482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d2851963c26474aabe3f5a67748ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.1
-  gasFuelConsuptionRate: 0.3
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 2
   vehicleRotationSpeed: 300
   engineForce: 150
   carDampinRatio: 0.1
@@ -62105,6 +62285,7 @@ GameObject:
   - component: {fileID: 4937390411567381566}
   - component: {fileID: 4536348838984687030}
   - component: {fileID: 750866365692469010}
+  - component: {fileID: 3002430878717392364}
   - component: {fileID: 5161883052878430832}
   - component: {fileID: 2294357855760314017}
   - component: {fileID: 7323653800593240900}
@@ -62282,6 +62463,41 @@ PolygonCollider2D:
       - {x: -0.7040901, y: 0.80011225}
       - {x: -1.0450664, y: 0.80133486}
   m_UseDelaunayMesh: 0
+--- !u!58 &3002430878717392364
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219013514076862842}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.54, y: 0.535}
+  serializedVersion: 2
+  m_Radius: 0.96
 --- !u!235 &5161883052878430832
 WheelJoint2D:
   m_ObjectHideFlags: 0
@@ -62440,8 +62656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22581a452873bf24c9eafb05a375bc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsuptionRate: 0.1
-  gasFuelConsuptionRate: 0.3
+  fuelConsuptionRate: 0.5
+  gasFuelConsuptionRate: 1.2
   vehicleRotationSpeed: 300
   engineForce: 150
   carDampinRatio: 0.1
@@ -62616,7 +62832,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.24700272, y: 0.44400012}
+  m_ConnectedAnchor: {x: 0.24700165, y: 0.44400024}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -68481,7 +68697,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.29
 --- !u!114 &3961002783555853700
 MonoBehaviour:
   m_ObjectHideFlags: 0

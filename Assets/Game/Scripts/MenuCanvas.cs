@@ -66,59 +66,21 @@ public class MenuCanvas : MonoBehaviour
         SpawnSelectedCar(LastSelectedCar);
     }
 
+    private void OnEnable() => YandexGame.CloseVideoEvent += Reward;
+    private void OnDisable() => YandexGame.CloseVideoEvent -= Reward;
+
+    private void Reward()
+    {
+        purchasePlayer.Play();
+        Coins += 3000;
+        UpdateCoinsIndicator();
+    }
+
     public void UpdateButtonsCovers()
     {
         carButtonCover.sprite = carImages[LastSelectedCar];
         trailButtonCover.sprite = trailImages[LaseSelectedTrail];
     }
-    //private void FirstSesion()
-    //{
-    //    if (YandexGame.savesData.isFirstSession)
-    //    {
-    //        YandexGame.savesData.Car0_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car0_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car0_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car0_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car0_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car1_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car1_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car1_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car1_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car1_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car2_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car2_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car2_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car2_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car2_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car3_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car3_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car3_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car3_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car3_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car4_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car4_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car4_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car4_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car4_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car5_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car5_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car5_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car5_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car5_Upgrades[5] = 1;
-
-    //        YandexGame.savesData.Car6_Upgrades[1] = 1;
-    //        YandexGame.savesData.Car6_Upgrades[2] = 1;
-    //        YandexGame.savesData.Car6_Upgrades[3] = 1;
-    //        YandexGame.savesData.Car6_Upgrades[4] = 1;
-    //        YandexGame.savesData.Car6_Upgrades[5] = 1;
-    //        YandexGame.SaveProgress();
-    //    }
-    //}
     private void DownloadData()
     {
         FreeCars = YandexGame.savesData.FreeCaras_sdk;
@@ -727,6 +689,7 @@ public class MenuCanvas : MonoBehaviour
         if (Music)
         {
             Music = false;
+            musicPlayerAudioSource.volume = 0f;
             musicPlayerAudioSource.Pause();
             musicButtonImage.sprite = toggleOFF;
             YandexGame.savesData.Music_sdk = false;
@@ -734,6 +697,7 @@ public class MenuCanvas : MonoBehaviour
         else 
         {
             Music = true;
+            musicPlayerAudioSource.volume = 1f;
             musicPlayerAudioSource.Play();
             musicButtonImage.sprite = toggleON;
             YandexGame.savesData.Music_sdk = true;
@@ -752,11 +716,6 @@ public class MenuCanvas : MonoBehaviour
     {
         SceneManager.LoadScene(LaseSelectedTrail);
     }
-
-
-
-
-
 
     private void Update()
     {

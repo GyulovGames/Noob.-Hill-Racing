@@ -112,6 +112,8 @@ public class Car4 : MonoBehaviour
         {
             stop = true;
             StartCoroutine(GameCanvas.Instance.OpenResultWindow("FuelOut"));
+            engineSoundPlayer.Stop();
+
         }
     }
     private void NoobAnimations()
@@ -139,21 +141,41 @@ public class Car4 : MonoBehaviour
     }
     private void DownloadUpgrades()
     {
-        frontWheelsForce = engineForce * 0.1f;
-        engineForce *= YandexGame.savesData.Car4_Upgrades[0];
+        if (YandexGame.savesData.Car4_Upgrades[0] == 1)
+        {
+            engineForce = 160f;
+        }
+        else
+        {
+            engineForce = 160 + 11 * YandexGame.savesData.Car4_Upgrades[0];
+        }
+
+        if (YandexGame.savesData.Car4_Upgrades[2] == 1)
+        {
+            frontWheelsForce = 27f;
+        }
+        else
+        {
+            frontWheelsForce = 27f * YandexGame.savesData.Car4_Upgrades[2];
+        }
 
         JointSuspension2D suspension = frontWheel_Joint.suspension;
         suspension.dampingRatio = carDampinRatio *= YandexGame.savesData.Car4_Upgrades[1];
         frontWheel_Joint.suspension = suspension;
         rearWheel_Joint.suspension = suspension;
 
-        frontWheelsForce *= YandexGame.savesData.Car4_Upgrades[2];
-
         wheelsPhysicsMaterial.friction = wheelsGrip *= YandexGame.savesData.Car4_Upgrades[3];
         frontWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
         rearWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
 
-        curentFuelAmount = fuelAmount * YandexGame.savesData.Car4_Upgrades[4];
+        if (YandexGame.savesData.Car4_Upgrades[4] == 1)
+        {
+            curentFuelAmount = fuelAmount;
+        }
+        else
+        {
+            curentFuelAmount = fuelAmount + 10 * YandexGame.savesData.Car4_Upgrades[4];
+        }
     }
     private void EngineSoundControl()
     {

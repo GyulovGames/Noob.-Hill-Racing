@@ -1,78 +1,78 @@
 {
-    "idSave": 5476,
-    "isFirstSession": false,
-    "language": "ru",
-    "promptDone": false,
-    "Music_sdk": true,
-    "Sounds_sdk": true,
-    "Coins_sdk": 46730,
-    "LastSelectedCar_sdk": 2,
-    "LastSelectedTrail_sdk": 2,
-    "FreeCaras_sdk": [
-        true,
-        true,
-        true,
-        false,
-        false,
-        false
-    ],
-    "FreeTrails_sdk": [
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        true
-    ],
-    "Car0_Upgrades": [
-        1,
-        1,
-        1,
-        1,
-        1
-    ],
-    "Car1_Upgrades": [
-        4,
-        5,
-        10,
-        3,
-        2
-    ],
-    "Car2_Upgrades": [
-        2,
-        10,
-        10,
-        6,
-        2
-    ],
-    "Car3_Upgrades": [
-        1,
-        1,
-        1,
-        1,
-        1
-    ],
-    "Car4_Upgrades": [
-        1,
-        1,
-        1,
-        1,
-        1
-    ],
-    "Car5_Upgrades": [
-        1,
-        1,
-        1,
-        1,
-        1
-    ],
-    "Car6_Upgrades": [
-        1,
-        1,
-        1,
-        1,
-        1
-    ]
+  "idSave": 805,
+  "isFirstSession": false,
+  "language": "ru",
+  "promptDone": false,
+  "Music_sdk": true,
+  "Sounds_sdk": true,
+  "Coins_sdk": 32870,
+  "LastSelectedCar_sdk": 0,
+  "LastSelectedTrail_sdk": 1,
+  "FreeCaras_sdk": [
+    true,
+    true,
+    false,
+    false,
+    true,
+    true
+  ],
+  "FreeTrails_sdk": [
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false
+  ],
+  "Car0_Upgrades": [
+    5,
+    5,
+    4,
+    4,
+    10
+  ],
+  "Car1_Upgrades": [
+    10,
+    10,
+    10,
+    10,
+    5
+  ],
+  "Car2_Upgrades": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "Car3_Upgrades": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "Car4_Upgrades": [
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "Car5_Upgrades": [
+    10,
+    10,
+    10,
+    10,
+    2
+  ],
+  "Car6_Upgrades": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
 }
