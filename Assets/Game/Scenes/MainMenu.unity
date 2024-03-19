@@ -4873,10 +4873,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3296781105967943186, guid: 9a52b99ce2caa854caf2b71cdfcf6f76, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 946608037}
     - target: {fileID: 4829229870726452857, guid: 9a52b99ce2caa854caf2b71cdfcf6f76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

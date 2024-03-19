@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/Ice.unity
     guid: ee668124e70c7764f84c3265aa6d07c7
   - enabled: 1
-    path: Assets/Game/Scenes/Neherr.unity
+    path: Assets/Game/Scenes/Netherr.unity
     guid: 5c7c37e86e5593841aca171e6685cc55
   - enabled: 1
     path: Assets/Game/Scenes/Mud.unity

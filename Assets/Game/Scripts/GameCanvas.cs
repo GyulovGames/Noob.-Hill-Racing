@@ -1,47 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using YG;
-using Unity.VisualScripting;
-using System;
 
 public class GameCanvas : MonoBehaviour
 {
     public static GameCanvas Instance { get; set; }
-    public static UnityEvent PauseEvent = new UnityEvent();
+
 
     [SerializeField] private FadeController fadeController;
     [SerializeField] private MoveController moveController;
-
-
+    [Space(5)]
     [SerializeField] private Text fuelOutText;
     [SerializeField] private Text driverCrashText;
     [SerializeField] private Text coinCounter;
-    [SerializeField] private Text resultWindowCoinCounter;
+    [SerializeField] private Text resultCoinsText;
     [Space(5)]
-    [SerializeField] private CanvasGroup smothTransitionPanel;
-    [SerializeField] private CanvasGroup fadeBackgrounPanel;
+    [SerializeField] private CanvasGroup smothTransition;
+    [SerializeField] private CanvasGroup fadeBackgroun;
     [SerializeField] private RectTransform pauseWindow;
     [SerializeField] private RectTransform resultWindow;
     [SerializeField] private GameObject MB_Control;
     [Space(5)]
     [SerializeField] private Image soundsToggleImage;
     [SerializeField] private Image musicToggleImage;
+    [SerializeField] private Image fuelBarImage;
     [SerializeField] private Sprite toggleON;
     [SerializeField] private Sprite toggleOFF;
-    [SerializeField] private Image fuelBarImage;
     [SerializeField] private Slider fuelBarSlider;
     [SerializeField] private AudioSource buttonPlayer;
-    [Space(5)]
+    [SerializeField] private AudioSource purchasePlayer;
     [SerializeField] private Gradient fuelBarGradient;
 
     [HideInInspector] public float horizontalInput;
+    private bool userDevice = true;
 
-    private bool isDesctop = true;
+    public static UnityEvent PauseEvent = new UnityEvent();
 
+
+    private void OnEnable() => YandexGame.CloseVideoEvent += Reward;
+    private void OnDisable() => YandexGame.CloseVideoEvent -= Reward;
 
 
     private void Awake()
@@ -55,11 +55,20 @@ public class GameCanvas : MonoBehaviour
     public void Start()
     {
         RemoveSmothTransition();
-        LoadSoundsSettings();
-        LoadMusicSettings();
+        UpdateSoundsSettings();
+        UpdateMusicSettings();
         DefineUserDevice();
     }
 
+    private void Reward()
+    {
+        purchasePlayer.Play();
+        int x3_Coins = int.Parse(resultCoinsText.text);
+        x3_Coins = x3_Coins * 3;
+        resultCoinsText.text = x3_Coins.ToString();
+        YandexGame.savesData.Coins_sdk += x3_Coins;
+        YandexGame.SaveProgress();
+    }
     public void UpdateFuelBarOnStart(float fuelAmmountOnStart)
     {
         fuelBarSlider.maxValue = fuelAmmountOnStart;
@@ -68,14 +77,14 @@ public class GameCanvas : MonoBehaviour
     public IEnumerator OpenResultWindow(string reason)
     {
         yield return new WaitForSeconds(2.75f);
-        fadeController.FadeIn(fadeBackgrounPanel);
+        fadeController.FadeIn(fadeBackgroun);
         moveController.MoveIn(resultWindow);
 
         int coins = int.Parse(coinCounter.text);
         YandexGame.savesData.Coins_sdk += coins;
         YandexGame.SaveProgress();
 
-        resultWindowCoinCounter.text = coins.ToString();
+        resultCoinsText.text = coins.ToString();
 
 
         if (reason == "Crash")
@@ -99,66 +108,28 @@ public class GameCanvas : MonoBehaviour
     }
     private void RemoveSmothTransition()
     {
-        fadeController.FadeOut(smothTransitionPanel);
-    }
-    private void LoadSoundsSettings()
-    {
-        bool sounds = YandexGame.savesData.Sounds_sdk;
-
-        if (sounds == true)
-        {
-            buttonPlayer.volume = 1f;
-            soundsToggleImage.sprite = toggleON;
-        }
-        else if (sounds == false)
-        {
-            buttonPlayer.volume = 0f;
-            soundsToggleImage.sprite = toggleOFF;
-        }
-    }
-    private void LoadMusicSettings()
-    {
-        GameObject musicPlayerObject = GameObject.FindGameObjectWithTag("MusicPlayer");
-        AudioSource musicPlayer = musicPlayerObject.GetComponent<AudioSource>();
-
-        bool music = YandexGame.savesData.Music_sdk;
-
-        if (music == true)
-        {
-            musicPlayer.volume = 1f;
-            musicToggleImage.sprite = toggleON;
-        }
-        else if (music == false)
-        {
-            musicPlayer.Stop();
-            musicPlayer.volume = 0f;
-            musicToggleImage.sprite = toggleOFF;
-        }
-    }
-    private void LoadMainMenu()
-    {
-        SceneManager.LoadScene(0);
+        fadeController.FadeOut(smothTransition);
     }
     private void DefineUserDevice()
     {
-        string userDevice = YandexGame.EnvironmentData.deviceType.ToString();
+        string isDesctop = YandexGame.EnvironmentData.deviceType.ToString();
 
-        switch (userDevice)
+        switch (isDesctop)
         {
             case "desktop":
-                isDesctop = true;
+                this.userDevice = true;
                 MB_Control.SetActive(false);
                 break;
             case "mobile":
-                isDesctop = false;
+                this.userDevice = false;
                 MB_Control.SetActive(true);
                 break;
             case "tablet":
-                isDesctop = false;
+                this.userDevice = false;
                 MB_Control.SetActive(true);
                 break;
             default:
-                isDesctop = false;
+                this.userDevice = false;
                 MB_Control.SetActive(true);
                 break;
         }
@@ -169,50 +140,72 @@ public class GameCanvas : MonoBehaviour
         newnumber += 5;
         coinCounter.text = newnumber.ToString();
     }
+
     public void UpdateSoundsSettings()
     {
-        bool Sounds = YandexGame.savesData.Sounds_sdk;
+        AudioSource[] allAudios = FindObjectsOfType<AudioSource>();
 
-        if (Sounds)
+        bool sounds = YandexGame.savesData.Sounds_sdk;
+
+        if (sounds)
         {
-            buttonPlayer.volume = 1f;
             soundsToggleImage.sprite = toggleON;
+
+            foreach (AudioSource audioSource in allAudios)
+            {
+                if (audioSource.gameObject.tag != "MusicPlayer")
+                {
+                    audioSource.volume = 1;
+                }
+            }
         }
         else
         {
-            buttonPlayer.volume = 0f;
             soundsToggleImage.sprite = toggleOFF;
+
+            foreach (AudioSource audioSource in allAudios)
+            {
+                if (audioSource.gameObject.tag != "MusicPlayer")
+                {
+                    audioSource.volume = 0;
+                }
+            }
         }
     }
     public void UpdateMusicSettings()
     {
         GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
         AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
+        bool music = YandexGame.savesData.Music_sdk;
 
-        bool Music = YandexGame.savesData.Music_sdk;
-
-        if (Music)
+        if (music)
         {
-            musicPlayerAudioSource.volume = 1f;
+            if (!musicPlayerAudioSource.isPlaying)
+            {
+                musicPlayerAudioSource.Play();
+            }
+
             musicToggleImage.sprite = toggleON;
         }
         else
         {
-            musicPlayerAudioSource.Stop();
-            musicPlayerAudioSource.volume = 0f;
+            musicPlayerAudioSource.Pause();
             musicToggleImage.sprite = toggleOFF;
         }
     }
-    
+
+    public void btn_RewardMultyplay()
+    {
+        YandexGame.RewVideoShow(0);
+    }
     public void btn_ChangeSounds()
     {
         AudioSource[] allAudios = FindObjectsOfType<AudioSource>();
 
-        bool Sounds = YandexGame.savesData.Sounds_sdk;
+        bool sounds = YandexGame.savesData.Sounds_sdk;
 
-        if (Sounds)
+        if (sounds)
         {
-            buttonPlayer.volume = 0f;
             soundsToggleImage.sprite = toggleOFF;
             YandexGame.savesData.Sounds_sdk = false;
 
@@ -220,14 +213,12 @@ public class GameCanvas : MonoBehaviour
             {
                 if (audioSource.gameObject.tag != "MusicPlayer")
                 {
-
-                    audioSource.volume = 0f;
+                    audioSource.volume = 0;
                 }
             }
         }
         else
         {
-            buttonPlayer.volume = 1f;
             buttonPlayer.Play();
             soundsToggleImage.sprite = toggleON;
             YandexGame.savesData.Sounds_sdk = true;
@@ -236,7 +227,7 @@ public class GameCanvas : MonoBehaviour
             {
                 if (audioSource.gameObject.tag != "MusicPlayer")
                 {
-                    audioSource.volume = 1f;
+                    audioSource.volume = 1;
                 }
             }
         }
@@ -247,10 +238,11 @@ public class GameCanvas : MonoBehaviour
     {
         GameObject musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
         AudioSource musicPlayerAudioSource = musicPlayer.GetComponent<AudioSource>();
-        bool Music = YandexGame.savesData.Music_sdk;
+        bool music = YandexGame.savesData.Music_sdk;
+
         buttonPlayer.Play();
 
-        if (Music)
+        if (music)
         {
             musicPlayerAudioSource.Pause();
             musicToggleImage.sprite = toggleOFF;
@@ -265,70 +257,24 @@ public class GameCanvas : MonoBehaviour
 
         YandexGame.SaveProgress();
     }
-    public void btn_Sounds()
-    {
-        bool sounds = YandexGame.savesData.Sounds_sdk;
-
-        if (sounds == true)
-        {
-            buttonPlayer.volume = 0f;
-            soundsToggleImage.sprite = toggleOFF;
-            YandexGame.savesData.Sounds_sdk = false;
-            
-        }
-        else if (sounds == false)
-        {
-            buttonPlayer.volume = 1f;
-            buttonPlayer.Play();
-            soundsToggleImage.sprite = toggleON;
-            YandexGame.savesData.Sounds_sdk = true;
-
-            
-        }
-
-        YandexGame.SaveProgress();
-    }
-    public void btn_Music()
-    {
-        buttonPlayer.Play();
-        GameObject musicplayerObject = GameObject.FindGameObjectWithTag("MusicPlayer");
-        AudioSource musicPlayer = musicplayerObject.GetComponent<AudioSource>();
-
-        bool music = YandexGame.savesData.Music_sdk;
-
-        if (music == true)
-        {
-            musicPlayer.Pause();
-            musicToggleImage.sprite = toggleOFF;
-            YandexGame.savesData.Music_sdk = false;
-        }
-        else if (music == false)
-        {
-            musicPlayer.Play();
-            musicToggleImage.sprite = toggleOFF;
-            YandexGame.savesData.Music_sdk = true;
-        }
-
-        YandexGame.SaveProgress();
-    }
     public void btn_Pause()
     {
         buttonPlayer.Play();
-        fadeController.FadeIn(fadeBackgrounPanel);
+        fadeController.FadeIn(fadeBackgroun);
         moveController.MoveIn(pauseWindow);
         PauseEvent.Invoke();
     }
     public void btn_Resume()
     {
         buttonPlayer.Play();
-        fadeController.FadeOut(fadeBackgrounPanel);
+        fadeController.FadeOut(fadeBackgroun);
         moveController.MoveOut(pauseWindow);
         PauseEvent.Invoke();
     }
     public void btn_Restart()
     {
         buttonPlayer.Play();
-        fadeController.FadeIn(smothTransitionPanel);
+        fadeController.FadeIn(smothTransition);
 
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         StartCoroutine(DelayLoad(sceneIndex));
@@ -341,14 +287,14 @@ public class GameCanvas : MonoBehaviour
 
         buttonPlayer.Play();
         moveController.MoveOut(pauseWindow);
-        fadeController.FadeIn(smothTransitionPanel);
+        fadeController.FadeIn(smothTransition);
         StartCoroutine(DelayLoad(0));
     }
 
     #region PC_Control
     private void Update()
     {
-        if (isDesctop)
+        if (userDevice)
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }

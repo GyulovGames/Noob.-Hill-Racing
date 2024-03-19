@@ -7,35 +7,37 @@ public class Car0 : MonoBehaviour
     [SerializeField] private float gasFuelConsuptionRate;
     [SerializeField] private float vehicleRotationSpeed;
     [Space(5)]
-
-    [Header("Upgrade Multipliers")]
+    [Header("Default Characteristics")]
     [SerializeField] private float engineForce;
     [SerializeField] private float carDampinRatio;
     [SerializeField] private float frontWheelsForce;
-    [SerializeField] private float wheelsGrip;                    // Множимые не должны использоваться. Переделать.
+    [SerializeField] private float wheelsGrip;                    
     [SerializeField] private float fuelAmount;
     [Space(5)]
-
     [SerializeField] private Rigidbody2D carRigidBody;
-    [SerializeField] private Rigidbody2D frontWheel_RigidBody;
-    [SerializeField] private Rigidbody2D rearWheel_RigidBody;
-    [SerializeField] private WheelJoint2D frontWheel_Joint;
-    [SerializeField] private WheelJoint2D rearWheel_Joint;
-    [SerializeField] private CircleCollider2D frontWheel_CircleCollider;
-    [SerializeField] private CircleCollider2D rearWheel_CircleCollider;
-    [SerializeField] private PhysicsMaterial2D wheelsPhysicsMaterial;
     [Space(5)]
-
-    [SerializeField] private WheelGrounded frontWheelGround;
-    [SerializeField] private WheelGrounded rearWheelGround;
-    [SerializeField] private ParticleSystem frontWheel_Particles;
-    [SerializeField] private ParticleSystem rearWheel_Particles;
+    [SerializeField] private Rigidbody2D wheel_1Rigid;
+    [SerializeField] private Rigidbody2D wheel_2Rigid;
+    [Space(5)]
+    [SerializeField] private WheelJoint2D wheelJoint1;
+    [SerializeField] private WheelJoint2D wheelJoint2;
+    [Space(5)]
+    [SerializeField] private CircleCollider2D circleCollider1;
+    [SerializeField] private CircleCollider2D circleCollider2;
+    [Space(5)]
+    [SerializeField] private WheelGrounded wheel1_Grounded;
+    [SerializeField] private WheelGrounded wheel2_Grounded;
+    [Space(5)]
+    [SerializeField] private ParticleSystem wheel1_Particles;
+    [SerializeField] private ParticleSystem wheel2_Particles;
+    [Space(5)]
+    [SerializeField] private PhysicsMaterial2D physicsMaterial;
     [SerializeField] private AudioSource engineSoundPlayer       ;
     [SerializeField] private Animator noobAnimator;
 
-    public float curentFuelAmount;
+    private float originalFuelAmount;
     private float horizontal;
-    private bool stop = false;
+    private bool stopGame;
 
 
     private void Awake()
@@ -46,31 +48,21 @@ public class Car0 : MonoBehaviour
     }
 
     private void Start()
-    {        
-        UpdateFuelBarOnStart();
-        EngineSound();
-    }
-
-    private void EngineSound()
     {
-        bool sounds = YandexGame.savesData.Sounds_sdk;
-
-        if (sounds)
-        {
-            engineSoundPlayer.Play();
-        }
+        UpdateFuelBarOnStart();
     }
+
     private void PausePlay()
     {
-        if (stop)
+        if (stopGame)
         {
-            stop = false;
+            stopGame = false;
             engineSoundPlayer.Play();
             carRigidBody.bodyType = RigidbodyType2D.Dynamic;
         }
         else
         {
-            stop = true;
+            stopGame = true;
             engineSoundPlayer.Stop();
             carRigidBody.bodyType = RigidbodyType2D.Static;
         }
@@ -81,34 +73,35 @@ public class Car0 : MonoBehaviour
     }
     public void HitNoobHead()
     {
-        if (!stop)
+        if (!stopGame)
         {
-            stop = true;
+            stopGame = true;
             noobAnimator.SetBool("Dead", true);
             StartCoroutine(GameCanvas.Instance.OpenResultWindow("Crash"));
         }
     }
     private void CarMovement()
     {
-        rearWheel_RigidBody.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
-        frontWheel_RigidBody.AddTorque(-horizontal * frontWheelsForce * Time.fixedDeltaTime);
+        wheel_1Rigid.AddTorque(-horizontal * frontWheelsForce * Time.fixedDeltaTime);
+
+        wheel_2Rigid.AddTorque(-horizontal * engineForce * Time.fixedDeltaTime);
     }
     private void UpdateFuelBar()
     {       
         if (horizontal == 0)
         {
-            curentFuelAmount -= Time.deltaTime * fuelConsuptionRate;                              
+            fuelAmount -= Time.deltaTime * fuelConsuptionRate;                              
         }
         else
         {
-            curentFuelAmount -= Time.deltaTime * gasFuelConsuptionRate;
+            fuelAmount -= Time.deltaTime * gasFuelConsuptionRate;
         }
 
-        GameCanvas.Instance.UpdateFuelbar(curentFuelAmount);
+        GameCanvas.Instance.UpdateFuelbar(fuelAmount);
 
-        if (curentFuelAmount <= 0)
+        if (fuelAmount <= 0)
         {
-            stop = true;
+            stopGame = true;
             StartCoroutine(GameCanvas.Instance.OpenResultWindow("FuelOut"));
             engineSoundPlayer.Stop(); ;
         }
@@ -131,53 +124,39 @@ public class Car0 : MonoBehaviour
     }
     private void RotationControl()
     {
-        if(!frontWheelGround.wheelGrounded && rearWheelGround.wheelGrounded)
+        if(!wheel1_Grounded.wheelGrounded && !wheel2_Grounded.wheelGrounded)
         {
             carRigidBody.AddTorque(horizontal * vehicleRotationSpeed * Time.fixedDeltaTime);
         }
     }
     private void DownloadUpgrades()
     {
-        if (YandexGame.savesData.Car0_Upgrades[0] == 1)
+        if (YandexGame.savesData.Car0_Upgrades[0] > 1)       
         {
-            engineForce = 150f;
+            engineForce += 10 * YandexGame.savesData.Car0_Upgrades[0];
         }
-        else
-        {
-            engineForce = 150 + 10 * YandexGame.savesData.Car0_Upgrades[0];
-        }
+       
+        frontWheelsForce *= YandexGame.savesData.Car0_Upgrades[2];
+        
 
-        if (YandexGame.savesData.Car0_Upgrades[2] == 1)
-        {
-            frontWheelsForce = 25f;
-        }
-        else
-        {
-            frontWheelsForce = 25f * YandexGame.savesData.Car0_Upgrades[2];
-        }
-
-        JointSuspension2D suspension = frontWheel_Joint.suspension;
+        JointSuspension2D suspension = wheelJoint1.suspension;
         suspension.dampingRatio = carDampinRatio *= YandexGame.savesData.Car0_Upgrades[1];
-        frontWheel_Joint.suspension = suspension;
-        rearWheel_Joint.suspension = suspension;
+        wheelJoint1.suspension = suspension;
+        wheelJoint2.suspension = suspension;
 
-        wheelsPhysicsMaterial.friction = wheelsGrip *= YandexGame.savesData.Car0_Upgrades[3];
-        frontWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
-        rearWheel_CircleCollider.sharedMaterial = wheelsPhysicsMaterial;
+        physicsMaterial.friction = wheelsGrip *= YandexGame.savesData.Car0_Upgrades[3];
+        circleCollider1.sharedMaterial = physicsMaterial;
+        circleCollider2.sharedMaterial = physicsMaterial;
 
-        if (YandexGame.savesData.Car0_Upgrades[4] == 1)
+        if (YandexGame.savesData.Car0_Upgrades[4] > 1)        
         {
-            curentFuelAmount = fuelAmount;
-        }
-        else
-        {
-            curentFuelAmount = fuelAmount + 6 * YandexGame.savesData.Car0_Upgrades[4];
+            fuelAmount += 5 * YandexGame.savesData.Car0_Upgrades[4];
         }
         
     }
     private void EngineSoundControl()
     {
-        float carCurrentPitch = horizontal + rearWheel_RigidBody.velocity.x * 10f * Time.deltaTime;
+        float carCurrentPitch = horizontal + carRigidBody.velocity.x * 10f * Time.deltaTime;
 
         if (carCurrentPitch > 1)
         {
@@ -185,7 +164,8 @@ public class Car0 : MonoBehaviour
         }
         else if(carCurrentPitch < -1)
         {
-            engineSoundPlayer.pitch = carCurrentPitch;
+            float newPich = Mathf.Abs(carCurrentPitch);
+            engineSoundPlayer.pitch = newPich;
         }
         else
         {
@@ -194,52 +174,54 @@ public class Car0 : MonoBehaviour
     }
     private void UpdateFuelBarOnStart()
     {
-        GameCanvas.Instance.UpdateFuelBarOnStart(curentFuelAmount);
+        originalFuelAmount = fuelAmount;
+        GameCanvas.Instance.UpdateFuelBarOnStart(fuelAmount);
     }
+
 
     private void Update()
     {
-        if (!stop)
+        if (!stopGame)
         {
-            if (horizontal != 0 && frontWheelGround.wheelGrounded)
+            if (horizontal != 0 && wheel1_Grounded.wheelGrounded)
             {
-                if (!frontWheel_Particles.isPlaying)
+                if (!wheel1_Particles.isPlaying)
                 {
-                    frontWheel_Particles.Play();
+                    wheel1_Particles.Play();
                 }
             }
             else
             {
-                if (frontWheel_Particles.isPlaying)
+                if (wheel1_Particles.isPlaying)
                 {
-                    frontWheel_Particles.Stop();
+                    wheel1_Particles.Stop();
                 }
             }
 
-            if (horizontal != 0 && rearWheelGround.wheelGrounded)
+            if (horizontal != 0 && wheel2_Grounded.wheelGrounded)
             {
-                if (!rearWheel_Particles.isPlaying)
+                if (!wheel2_Particles.isPlaying)
                 {
-                    rearWheel_Particles.Play();
+                    wheel2_Particles.Play();
                 }
             }
             else
             {
-                if (rearWheel_Particles.isPlaying)
+                if (wheel2_Particles.isPlaying)
                 {
-                    rearWheel_Particles.Stop();
+                    wheel2_Particles.Stop();
                 }
             }
         }
         else
         {
-            frontWheel_Particles.Stop();
-            rearWheel_Particles.Stop();
+            wheel1_Particles.Stop();
+            wheel2_Particles.Stop();
         }
     }
     private void FixedUpdate()
     {
-        if (!stop)
+        if (!stopGame)
         {
             UserInput();
             CarMovement();
@@ -257,8 +239,8 @@ public class Car0 : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Canister")
         {
-            curentFuelAmount = fuelAmount * YandexGame.savesData.Car0_Upgrades[4];
-            GameCanvas.Instance.UpdateFuelBarOnStart(curentFuelAmount);
+            fuelAmount = originalFuelAmount;
+            GameCanvas.Instance.UpdateFuelBarOnStart(fuelAmount);
         }
     }
 }

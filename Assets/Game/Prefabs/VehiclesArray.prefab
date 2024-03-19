@@ -95,7 +95,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 0.875}
+  m_Size: {x: 2.875, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -165,7 +165,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 2.875, y: 1}
-    newSize: {x: 2, y: 0.875}
+    newSize: {x: 2.875, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -430,33 +430,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 2
-  vehicleRotationSpeed: 300
+  vehicleRotationSpeed: 700
   engineForce: 150
   carDampinRatio: 0.1
-  frontWheelsForce: 0
+  frontWheelsForce: 25
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 7953969473953073869}
-  frontWheel_RigidBody: {fileID: 2944236896333634935}
-  rearWheel_RigidBody1: {fileID: 3118906665884376399}
-  rearWheel_RigidBody2: {fileID: 7274288324245146531}
-  rearWheel_RigidBody3: {fileID: 2418624980416501607}
-  frontWheel_Joint: {fileID: 7550882340272835391}
-  rearWheel_Joint1: {fileID: 6386635768002563589}
-  rearWheel_Joint2: {fileID: 3518467084909705096}
-  rearWheel_Joint3: {fileID: 8600248797143618381}
-  frontWheel_CircleCollider: {fileID: 5409454663637795466}
-  rearWheel_CircleCollider1: {fileID: 5012989156272513824}
-  rearWheel_CircleCollider2: {fileID: 5871591318036195227}
-  rearWheel_CircleCollider3: {fileID: 5978882596620423034}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 2362363840990924644}
-  rearWheelGround: {fileID: 805084135804418214}
-  frontWheel_Particles: {fileID: 7720539808738853761}
-  rearWheel_Particles: {fileID: 5258731901368967200}
+  wheel_1Rigid: {fileID: 2944236896333634935}
+  wheel_2Rigid: {fileID: 3118906665884376399}
+  wheel_3Rigid: {fileID: 7274288324245146531}
+  wheel_4Rigid: {fileID: 2418624980416501607}
+  wheelJoint1: {fileID: 7550882340272835391}
+  wheelJoint2: {fileID: 6386635768002563589}
+  wheelJoint3: {fileID: 3518467084909705096}
+  wheelJoint4: {fileID: 8600248797143618381}
+  circleCollider1: {fileID: 5409454663637795466}
+  circleCollider2: {fileID: 5012989156272513824}
+  circleCollider3: {fileID: 5871591318036195227}
+  circleCollider4: {fileID: 5978882596620423034}
+  wheel1_Grounded: {fileID: 2362363840990924644}
+  wheel2_Grounded: {fileID: 805084135804418214}
+  wheel1_Particles: {fileID: 7720539808738853761}
+  wheel2_Particles: {fileID: 5258731901368967200}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 7643568803606078728}
   noobAnimator: {fileID: 5108276797249113217}
-  curentFuelAmount: 100
 --- !u!1 &141302276313450800
 GameObject:
   m_ObjectHideFlags: 0
@@ -6973,27 +6972,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 1.2
-  vehicleRotationSpeed: 300
+  vehicleRotationSpeed: 700
   engineForce: 150
   carDampinRatio: 0.1
-  frontWheelsForce: 0
+  frontWheelsForce: 25
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 8313971178412674094}
-  frontWheel_RigidBody: {fileID: 4102266475480876795}
-  rearWheel_RigidBody: {fileID: 1092399061446960019}
-  frontWheel_Joint: {fileID: 963936454773326742}
-  rearWheel_Joint: {fileID: 5910814418770834267}
-  frontWheel_CircleCollider: {fileID: 7257998753630801935}
-  rearWheel_CircleCollider: {fileID: 8512633339765711388}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 6812839755947359404}
-  rearWheelGround: {fileID: 214947733795029333}
-  frontWheel_Particles: {fileID: 463920627939504332}
-  rearWheel_Particles: {fileID: 3471201727341950370}
+  wheel_1Rigid: {fileID: 4102266475480876795}
+  wheel_2Rigid: {fileID: 1092399061446960019}
+  wheelJoint1: {fileID: 963936454773326742}
+  wheelJoint2: {fileID: 5910814418770834267}
+  circleCollider1: {fileID: 7257998753630801935}
+  circleCollider2: {fileID: 8512633339765711388}
+  wheel1_Grounded: {fileID: 6812839755947359404}
+  wheel2_Grounded: {fileID: 214947733795029333}
+  wheel1_Particles: {fileID: 463920627939504332}
+  wheel2_Particles: {fileID: 3471201727341950370}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 5252666387681728951}
   noobAnimator: {fileID: 4591561603465188554}
-  curentFuelAmount: 100
 --- !u!1 &1971691824580359192
 GameObject:
   m_ObjectHideFlags: 0
@@ -17835,7 +17833,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 9
   m_LinearDrag: 0.14
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -18103,27 +18101,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 1.2
-  vehicleRotationSpeed: 400
-  engineForce: 120
+  vehicleRotationSpeed: 700
+  engineForce: 150
   carDampinRatio: 0.1
-  frontWheelsForce: 160
+  frontWheelsForce: 25
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 1956231406041305999}
-  frontWheel_RigidBody: {fileID: 2007449093805816850}
-  rearWheel_RigidBody: {fileID: 8726963808603168518}
-  frontWheel_Joint: {fileID: 2105201000711343728}
-  rearWheel_Joint: {fileID: 3829869245771959368}
-  frontWheel_CircleCollider: {fileID: 5209691386383101589}
-  rearWheel_CircleCollider: {fileID: 2497295484888218348}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 4790615784545295303}
-  rearWheelGround: {fileID: 418469969649746418}
-  frontWheel_Particles: {fileID: 7739979154836575421}
-  rearWheel_Particles: {fileID: 4610966237756453803}
+  wheel_1Rigid: {fileID: 2007449093805816850}
+  wheel_2Rigid: {fileID: 8726963808603168518}
+  wheelJoint1: {fileID: 2105201000711343728}
+  wheelJoint2: {fileID: 3829869245771959368}
+  circleCollider1: {fileID: 5209691386383101589}
+  circleCollider2: {fileID: 2497295484888218348}
+  wheel1_Grounded: {fileID: 4790615784545295303}
+  wheel2_Grounded: {fileID: 418469969649746418}
+  wheel1_Particles: {fileID: 7739979154836575421}
+  wheel2_Particles: {fileID: 4610966237756453803}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 149928396695216627}
   noobAnimator: {fileID: 6499965751493220401}
-  curentFuelAmount: 100
 --- !u!1 &2967175849705361398
 GameObject:
   m_ObjectHideFlags: 0
@@ -18680,7 +18677,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0625, y: 0.3125}
+  m_Size: {x: 1, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -18775,7 +18772,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 1, y: 0}
     oldSize: {x: 1, y: 0.25}
-    newSize: {x: 1.0625, y: 0.3125}
+    newSize: {x: 1, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -29507,7 +29504,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 0.875}
+  m_Size: {x: 2.9375, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -29577,7 +29574,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 2.9375, y: 1}
-    newSize: {x: 2, y: 0.875}
+    newSize: {x: 2.9375, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -29744,7 +29741,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 2.9375, y: 1}
-    newSize: {x: 2, y: 0.875}
+    newSize: {x: 2.9375, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -29862,30 +29859,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 1.7
-  vehicleRotationSpeed: 300
+  vehicleRotationSpeed: 700
   engineForce: 150
   carDampinRatio: 0.1
-  frontWheelsForce: 0
+  frontWheelsForce: 25
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 6107641262819665925}
-  frontWheel_RigidBody: {fileID: 1839623651405200778}
-  rearWheel_RigidBody1: {fileID: 4659864345199270138}
-  rearWheel_RigidBody2: {fileID: 1840039318536845371}
-  frontWheel_Joint: {fileID: 1662980757741992189}
-  rearWheel_Joint1: {fileID: 3967479982915259802}
-  rearWheel_Joint2: {fileID: 2447298004855891278}
-  frontWheel_CircleCollider: {fileID: 7111533496507385207}
-  rearWheel_CircleCollider1: {fileID: 2454987556700254751}
-  rearWheel_CircleCollider2: {fileID: 8606726762002404871}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 4315961706100900397}
-  rearWheelGround: {fileID: 6624101375912091387}
-  frontWheel_Particles: {fileID: 3951630465708666472}
-  rearWheel_Particles: {fileID: 4201824598998170904}
+  wheel_1Rigid: {fileID: 1839623651405200778}
+  wheel_2Rigid: {fileID: 4659864345199270138}
+  wheel_3Rigid: {fileID: 1840039318536845371}
+  wheelJoint1: {fileID: 1662980757741992189}
+  wheelJoint2: {fileID: 3967479982915259802}
+  wheelJoint3: {fileID: 2447298004855891278}
+  circleCollider1: {fileID: 7111533496507385207}
+  circleCollider2: {fileID: 2454987556700254751}
+  circleCollider3: {fileID: 8606726762002404871}
+  wheel1_Grounded: {fileID: 4315961706100900397}
+  wheel2_Grounded: {fileID: 6624101375912091387}
+  wheel1_Particles: {fileID: 3951630465708666472}
+  wheel2_Particles: {fileID: 4201824598998170904}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 3561097726100296975}
   noobAnimator: {fileID: 6102863317564542303}
-  curentFuelAmount: 100
 --- !u!1 &4709053206793658667
 GameObject:
   m_ObjectHideFlags: 0
@@ -61484,27 +61480,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 2
-  vehicleRotationSpeed: 300
-  engineForce: 150
+  vehicleRotationSpeed: 700
+  engineForce: 200
   carDampinRatio: 0.1
-  frontWheelsForce: 0
+  frontWheelsForce: 40
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 2650692278586103581}
-  frontWheel_RigidBody: {fileID: 5186888284884254758}
-  rearWheel_RigidBody: {fileID: 6374356802544838332}
-  frontWheel_Joint: {fileID: 6590326049186772062}
-  rearWheel_Joint: {fileID: 6674835296326667137}
-  frontWheel_CircleCollider: {fileID: 4557618881766415739}
-  rearWheel_CircleCollider: {fileID: 7721050018615867370}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 7405921143437642259}
-  rearWheelGround: {fileID: 6254993081441619365}
-  frontWheel_Particles: {fileID: 4121005108612123103}
-  rearWheel_Particles: {fileID: 5164027002451102977}
+  wheel_1Rigid: {fileID: 5186888284884254758}
+  wheel_2Rigid: {fileID: 6374356802544838332}
+  wheelJoint1: {fileID: 6590326049186772062}
+  wheelJoint2: {fileID: 6674835296326667137}
+  circleCollider1: {fileID: 4557618881766415739}
+  circleCollider2: {fileID: 7721050018615867370}
+  wheel1_Grounded: {fileID: 7405921143437642259}
+  wheel2_Grounded: {fileID: 6254993081441619365}
+  wheel1_Particles: {fileID: 4121005108612123103}
+  wheel2_Particles: {fileID: 5164027002451102977}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 2039222896967099439}
   noobAnimator: {fileID: 143155722488206454}
-  curentFuelAmount: 100
 --- !u!1 &7579159494819799229
 GameObject:
   m_ObjectHideFlags: 0
@@ -62517,7 +62512,7 @@ WheelJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
-    m_Frequency: 4.5
+    m_Frequency: 4.3
     m_Angle: 90
   m_UseMotor: 0
   m_Motor:
@@ -62542,7 +62537,7 @@ WheelJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 0
-    m_Frequency: 4.5
+    m_Frequency: 4.3
     m_Angle: 90
   m_UseMotor: 0
   m_Motor:
@@ -62658,27 +62653,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelConsuptionRate: 0.5
   gasFuelConsuptionRate: 1.2
-  vehicleRotationSpeed: 300
+  vehicleRotationSpeed: 700
   engineForce: 150
   carDampinRatio: 0.1
-  frontWheelsForce: 0
+  frontWheelsForce: 25
   wheelsGrip: 0.2
   fuelAmount: 100
   carRigidBody: {fileID: 4536348838984687030}
-  frontWheel_RigidBody: {fileID: 8004403499007324954}
-  rearWheel_RigidBody: {fileID: 7669146947192081562}
-  frontWheel_Joint: {fileID: 5161883052878430832}
-  rearWheel_Joint: {fileID: 2294357855760314017}
-  frontWheel_CircleCollider: {fileID: 5996783111541628309}
-  rearWheel_CircleCollider: {fileID: 1228821656863658415}
-  wheelsPhysicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
-  frontWheelGround: {fileID: 1217218604007892588}
-  rearWheelGround: {fileID: 3961002783555853700}
-  frontWheel_Particles: {fileID: 7773631693307096}
-  rearWheel_Particles: {fileID: 3825391350546468834}
+  wheel_1Rigid: {fileID: 8004403499007324954}
+  wheel_2Rigid: {fileID: 7669146947192081562}
+  wheelJoint1: {fileID: 5161883052878430832}
+  wheelJoint2: {fileID: 2294357855760314017}
+  circleCollider1: {fileID: 5996783111541628309}
+  circleCollider2: {fileID: 1228821656863658415}
+  wheel1_Grounded: {fileID: 1217218604007892588}
+  wheel2_Grounded: {fileID: 3961002783555853700}
+  wheel1_Particles: {fileID: 7773631693307096}
+  wheel2_Particles: {fileID: 3825391350546468834}
+  physicsMaterial: {fileID: 6200000, guid: c025eefb944403541b291f1dbbe7a97e, type: 2}
   engineSoundPlayer: {fileID: 7323653800593240900}
   noobAnimator: {fileID: 6201458694839223765}
-  curentFuelAmount: 100
 --- !u!1 &8443527257484381001
 GameObject:
   m_ObjectHideFlags: 0

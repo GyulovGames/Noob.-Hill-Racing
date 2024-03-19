@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -10,8 +8,6 @@ public class ObstacleMovement : MonoBehaviour
  
     private Transform carTransform;
     private Transform thisTransform;
-
-
 
     private void Start()
     {
