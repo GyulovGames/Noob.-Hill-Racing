@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using YG;
 
 public class NoobHead : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class NoobHead : MonoBehaviour
             {
                 isBroken = true;
                 headHit.Invoke();
-                crackPlayer.Play();
+                if (YandexGame.savesData.Sounds_sdk)
+                {
+                    crackPlayer.Play();
+                }
                 JointAngleLimits2D limith = hingeJoint2D.limits;
                 limith.max = 80;
                 limith.min = -80;

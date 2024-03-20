@@ -726,16 +726,4 @@ public class MenuCanvas : MonoBehaviour
     {
         SceneManager.LoadScene(LaseSelectedTrail);
     }
-
-
-    private void Update()
-    {
-
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            YandexGame.ResetSaveProgress();
-            YandexGame.SaveProgress();
-            print("Reset Progress!");
-        }
-    }
 }

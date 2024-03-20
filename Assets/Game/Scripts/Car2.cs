@@ -61,6 +61,7 @@ public class Car2 : MonoBehaviour
     private void Start()
     {
         UpdateFuelBarOnStart();
+        SetSoundsSettings();
     }
 
     private void PausePlay()
@@ -191,6 +192,13 @@ public class Car2 : MonoBehaviour
     {
         originalFuelAmount = fuelAmount;
         GameCanvas.Instance.UpdateFuelBarOnStart(fuelAmount);
+    }
+    private void SetSoundsSettings()
+    {
+        if (!YandexGame.savesData.Sounds_sdk)
+        {
+            engineSoundPlayer.volume = 0f;
+        }
     }
 
 

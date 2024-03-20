@@ -1,16 +1,16 @@
 {
-  "idSave": 2679,
+  "idSave": 2767,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "Music_sdk": false,
   "Sounds_sdk": true,
-  "Coins_sdk": 50225,
-  "LastSelectedCar_sdk": 0,
+  "Coins_sdk": 44395,
+  "LastSelectedCar_sdk": 1,
   "LastSelectedTrail_sdk": 1,
   "FreeCaras_sdk": [
     true,
-    false,
+    true,
     false,
     false,
     false,
@@ -27,17 +27,17 @@
     false
   ],
   "Car0_Upgrades": [
+    4,
     1,
-    1,
-    1,
+    4,
     1,
     1
   ],
   "Car1_Upgrades": [
-    1,
-    1,
-    1,
-    1,
+    6,
+    2,
+    7,
+    5,
     1
   ],
   "Car2_Upgrades": [

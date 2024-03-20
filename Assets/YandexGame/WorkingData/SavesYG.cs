@@ -13,7 +13,7 @@ namespace YG
         // Ваши сохранения
         public bool Music_sdk = true;
         public bool Sounds_sdk = true;
-        public int Coins_sdk = 50000;
+        public int Coins_sdk = 500;
         public int LastSelectedCar_sdk = 0;
         public int LastSelectedTrail_sdk = 1;
         public bool[] FreeCaras_sdk = new bool[6];

@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 public class RoadPart : MonoBehaviour
 {
@@ -9,9 +10,23 @@ public class RoadPart : MonoBehaviour
 
     void EnableAllChildren(Transform parent)
     {
-        foreach (Transform child in parent)
+        if (!YandexGame.savesData.Sounds_sdk)
         {
-            child.gameObject.SetActive(true);
+            foreach (Transform child in parent)
+            {
+                AudioSource audio = child.GetComponent<AudioSource>();
+                audio.volume = 0f;
+                child.gameObject.SetActive(true);              
+            }
+        }
+        else
+        {
+            foreach (Transform child in parent)
+            {
+                AudioSource audio = child.GetComponent<AudioSource>();
+                audio.volume = 1f;
+                child.gameObject.SetActive(true);
+            }
         }
     }
 }
