@@ -756,39 +756,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Netherr (Trail)
       objectReference: {fileID: 0}
-    - target: {fileID: 3016298431006824090, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3296793146625350687, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3675049409739700594, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5393953914247283668, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5396137782317283980, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5525419053209533238, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5852378333410838864, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6340741123989780741, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6485923085823236710, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
@@ -835,10 +807,6 @@ PrefabInstance:
     - target: {fileID: 7234450123453090741, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9110742490831340818, guid: 4165316ab68f95a4fb557c56e41f0b86, type: 3}
-      propertyPath: m_Creator
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

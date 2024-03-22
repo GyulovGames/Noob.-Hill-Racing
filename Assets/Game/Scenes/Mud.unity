@@ -756,59 +756,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mud (Trail)
       objectReference: {fileID: 0}
-    - target: {fileID: 1498469079433406179, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775208989823483167, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2246087268522125169, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3487651852678402033, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029992508194391716, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5275317929836967129, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411011918307234187, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5548447150581859317, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5895786848520611075, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6221801008901975999, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6323586758260900983, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7482104685436759774, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8068660715913443460, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8268043807150158781, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
@@ -851,14 +803,6 @@ PrefabInstance:
     - target: {fileID: 8698184947859967913, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894455148981430410, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9192393617056052926, guid: 7a7d6bb9b34d26d48bd6172073e3b32a, type: 3}
-      propertyPath: m_Creator
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

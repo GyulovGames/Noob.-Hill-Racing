@@ -17,7 +17,7 @@ namespace YG
         public int LastSelectedCar_sdk = 0;
         public int LastSelectedTrail_sdk = 1;
         public bool[] FreeCaras_sdk = new bool[6];
-        public bool[] FreeTrails_sdk = new bool[8];
+        public bool[] FreeTrails_sdk = new bool[9];
 
         public int[] Car0_Upgrades = new int[5];
         public int[] Car1_Upgrades = new int[5];

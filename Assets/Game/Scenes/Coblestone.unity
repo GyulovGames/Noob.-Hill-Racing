@@ -752,45 +752,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 177023115686737427, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 631450872318834730, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 795185429435790756, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 973187535369447596, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061930197718185364, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1163992855150141856, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1583342493380741051, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1857248675343600804, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5868548515012450834, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
       propertyPath: m_Name
       value: Coblestone (Trail)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6356432600119683778, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6510613277732375035, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
       propertyPath: m_Creator
@@ -835,30 +799,6 @@ PrefabInstance:
     - target: {fileID: 6540067399885912960, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7263301178755573120, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412709117036418514, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550786821459412736, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7971836878176530985, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8952914418745360760, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8997974890672254530, guid: d0d81d302fc6b084b825dd3bad5a0d67, type: 3}
-      propertyPath: m_Creator
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

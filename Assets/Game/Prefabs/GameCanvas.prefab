@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 2532245200057988350}
   - component: {fileID: 5536894486756103738}
   m_Layer: 5
-  m_Name: GAs
+  m_Name: Gas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -489003569, guid: d12535103191dba4a9e425540cf31f57, type: 3}
+  m_Sprite: {fileID: -154265701, guid: d12535103191dba4a9e425540cf31f57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1602655457, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
+  m_Sprite: {fileID: 1703075682, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2781,7 +2781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1602655457, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
+  m_Sprite: {fileID: 562921952, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3941,7 +3941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1158439534, guid: d12535103191dba4a9e425540cf31f57, type: 3}
+  m_Sprite: {fileID: 69572846, guid: d12535103191dba4a9e425540cf31f57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5066,8 +5066,8 @@ MonoBehaviour:
   soundsToggleImage: {fileID: 8593598555609813261}
   musicToggleImage: {fileID: 7133160419804413237}
   fuelBarImage: {fileID: 4469320032644332208}
-  toggleON: {fileID: -1602655457, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
-  toggleOFF: {fileID: 356643302, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
+  toggleON: {fileID: 562921952, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
+  toggleOFF: {fileID: 1703075682, guid: 7a84157d674b448439cdc5857d63c62e, type: 3}
   fuelBarSlider: {fileID: 362522330785662654}
   buttonPlayer: {fileID: 4747048712932176097}
   purchasePlayer: {fileID: 758158794628222606}

@@ -39,7 +39,7 @@ public class MenuCanvas : MonoBehaviour
     [SerializeField] private Sprite[] trailImages;
 
     private bool[] FreeCars = new bool[6];
-    private bool[] FreeTrails = new bool[8];
+    public bool[] FreeTrails = new bool[9];
     private int LastSelectedCar;
     private int LaseSelectedTrail;
     private string purchaseTip;
@@ -255,11 +255,13 @@ public class MenuCanvas : MonoBehaviour
         if (sounds)
         {
             buttonPlayer.volume = 1f;
+            purchasePlayer.volume = 1f;
             soundsButtonImage.sprite = toggleON;
         }
         else
         {
             buttonPlayer.volume = 0f;
+            purchasePlayer.volume = 0f;
             soundsButtonImage.sprite = toggleOFF;
         }
     }
@@ -687,6 +689,7 @@ public class MenuCanvas : MonoBehaviour
         }
 
         YandexGame.SaveProgress();
+        UpdateSoundsSettings();
     }
     public void btn_ChangeMusic()
     {     

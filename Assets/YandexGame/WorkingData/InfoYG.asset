@@ -51,31 +51,31 @@ MonoBehaviour:
   languages:
     ru: 1
     en: 1
-    tr: 1
-    az: 1
-    be: 1
-    he: 1
-    hy: 1
-    ka: 1
-    et: 1
-    fr: 1
-    kk: 1
-    ky: 1
-    lt: 1
-    lv: 1
-    ro: 1
-    tg: 1
-    tk: 1
-    uk: 1
-    uz: 1
-    es: 1
-    pt: 1
-    ar: 1
-    id: 1
-    ja: 1
-    it: 1
-    de: 1
-    hi: 1
+    tr: 0
+    az: 0
+    be: 0
+    he: 0
+    hy: 0
+    ka: 0
+    et: 0
+    fr: 0
+    kk: 0
+    ky: 0
+    lt: 0
+    lv: 0
+    ro: 0
+    tg: 0
+    tk: 0
+    uk: 0
+    uz: 0
+    es: 0
+    pt: 0
+    ar: 0
+    id: 0
+    ja: 0
+    it: 0
+    de: 0
+    hi: 0
   fonts:
     defaultFont:
     - {fileID: 12800000, guid: 8f6f5be81350d5548bc355081c25e640, type: 3}
